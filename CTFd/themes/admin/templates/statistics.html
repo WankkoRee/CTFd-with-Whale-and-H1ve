@@ -3,19 +3,19 @@
 {% block content %}
 <div class="jumbotron">
 	<div class="container">
-		<h1>Statistics</h1>
+		<h1>状态</h1>
 	</div>
 </div>
 <div class="container">
 	<div class="row">
 		<div class="col-md-4 text-right">
-			<h5><b>{{ user_count }}</b> users registered</h5>
+			<h5><b>{{ user_count }}</b> 个用户</h5>
 			{% if get_config('user_mode') == 'teams' %}
-			<h5><b>{{ team_count }}</b> teams registered</h5>
+			<h5><b>{{ team_count }}</b> 个队伍</h5>
 			{% endif %}
-			<h5><b>{{ ip_count }}</b> IP addresses</h5>
+			<h5><b>{{ ip_count }}</b> 个IP</h5>
 			<hr>
-			<h5><b>{{ challenge_count }}</b> challenges</h5>
+			<h5><b>{{ challenge_count }}</b> 个题目</h5>
 			{% if most_solved %}
 				<h5><b>{{ most_solved }}</b> has the most solves with <br>{{ solve_data[most_solved] }} solves</h5>
 			{% endif %}
@@ -55,8 +55,8 @@
 				</div>
 			</div>
 			<div class="text-center">
-				<h5><b>{{ solve_count }}</b> right submissions</h5>
-				<h5><b>{{ wrong_count }}</b> wrong submissions</h5>
+				<h5><b>{{ solve_count }}</b> 次正确提交</h5>
+				<h5><b>{{ wrong_count }}</b> 次错误提交</h5>
 			</div>
 		</div>
 		<div class="col-md-6">

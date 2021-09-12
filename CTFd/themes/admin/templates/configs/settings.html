@@ -2,89 +2,89 @@
 	<form method="POST" autocomplete="off" class="w-100">
 		<div class="form-group">
 			<label>
-				Challenge Visibility<br>
+				题目可见性<br>
 				<small class="form-text text-muted">
-					Control whether users must be logged in to see challenges
+					控制题目页面的可见程度
 				</small>
 			</label>
 			<select class="form-control custom-select" name="challenge_visibility">
 				<option value="public" {% if challenge_visibility == 'public' %}selected{% endif %}>
-					Public
+					完全公开
 				</option>
 				<option value="private" {% if challenge_visibility == 'private' %}selected{% endif %}>
-					Private
+					需要登录
 				</option>
 				<option value="admins" {% if challenge_visibility == 'admins' %}selected{% endif %}>
-					Admins Only
+					仅限管理
 				</option>
 			</select>
 		</div>
 
 		<div class="form-group">
 			<label>
-				Score Visibility<br>
+				得分可见性<br>
 				<small class="form-text text-muted">
-					Control whether solves/score are shown to the public, to logged in users, hidden to all non-admins, or only shown to admins
+					控制得分页面的可见程度
 				</small>
 			</label>
 			<select class="form-control custom-select" name="score_visibility">
 				<option value="public" {% if score_visibility == 'public' %}selected{% endif %}>
-					Public
+					完全公开
 				</option>
 				<option value="private" {% if score_visibility == 'private' %}selected{% endif %}>
-					Private
+					需要登录
 				</option>
 				<option value="hidden" {% if score_visibility == 'hidden' %}selected{% endif %}>
-					Hidden
+					完全隐藏
 				</option>
 				<option value="admins" {% if score_visibility == 'admins' %}selected{% endif %}>
-					Admins Only
+					仅限管理
 				</option>
 			</select>
 			<small class="form-text text-muted">
-				This setting should generally be the same as Account Visibility to avoid conflicts.
+				这个选项通常需要与用户可见性一致，防止产生问题
 			</small>
 		</div>
 
 		<div class="form-group">
 			<label>
-				Account Visibility<br>
+				用户可见性<br>
 				<small class="form-text text-muted">
-					Control whether accounts (users &amp; teams) are shown to everyone or only to admins
+					控制用户页面 (个人 &amp; 队伍)的可见程度
 				</small>
 			</label>
 			<select class="form-control custom-select" name="account_visibility">
 				<option value="public" {% if account_visibility == 'public' %}selected{% endif %}>
-					Public
+					完全公开
 				</option>
 				<option value="private" {% if account_visibility == 'private' %}selected{% endif %}>
-					Private
+					需要登录
 				</option>
 				<option value="admins" {% if account_visibility == 'admins' %}selected{% endif %}>
-					Admins Only
+					仅限管理
 				</option>
 			</select>
 			<small class="form-text text-muted">
-				This setting should generally be the same as Score Visibility to avoid conflicts.
+				这个选项通常需要与得分可见性一致，防止产生问题
 			</small>
 		</div>
 
 		<div class="form-group">
 			<label>
-				Registration Visibility<br>
+				注册可见性<br>
 				<small class="form-text text-muted">
-					Control whether registration is enabled for everyone or disabled
+					控制注册页面的可见程度
 				</small>
 			</label>
 			<select class="form-control custom-select" name="registration_visibility">
 				<option value="public" {% if registration_visibility == 'public' %}selected{% endif %}>
-					Public
+					开放注册
 				</option>
 				<option value="private" {% if registration_visibility == 'private' %}selected{% endif %}>
-					Private
+					禁止注册
 				</option>
 				<option value="mlc" {% if registration_visibility == 'mlc' %}selected{% endif %}>
-					MajorLeagueCyber Only
+					仅限MajorLeagueCyber
 				</option>
 			</select>
 		</div>
@@ -93,14 +93,14 @@
 			<div class="form-check">
 				<label>
 					<input id="paused" name="paused" type="checkbox" {% if paused %}checked{% endif %}>
-					Pause CTF<br>
+					暂停站点<br>
 					<small>
-						Prevent users from submitting answers until unpaused. Challenges can still be viewed.
+						暂停接收所有题目的flag提交，但是题目仍然可见
 					</small>
 				</label>
 			</div>
 		</div>
 
-		<button type="submit" class="btn btn-md btn-primary float-right">Update</button>
+		<button type="submit" class="btn btn-md btn-primary float-right">保存</button>
 	</form>
 </div>

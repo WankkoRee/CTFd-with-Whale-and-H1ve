@@ -110,8 +110,8 @@
 				<div class="form-group">
 					<div class="col-md-12">
 						<label>
-							Title<br>
-							<small class="text-muted">This is the title shown on the navigation bar</small>
+							标题<br>
+							<small class="text-muted">这个标题会显示在导航栏</small>
 						</label>
 						<input class="form-control radius" id="route" type="text" name="title"
 							   value="{% if page is defined %}{{ page.title }}{% endif %}" placeholder="Title">
@@ -121,10 +121,9 @@
 				<div class="form-group">
 					<div class="col-md-12">
 						<label>
-							Route<br>
+							路由<br>
 							<small class="text-muted">
-								This is the URL route that your page will be at (e.g. /page). You can
-								also enter links to link to that page.
+								这是一个URL路由 (e.g. /page). 当然你也可以填写一个链接用去跳转。
 							</small>
 						</label>
 						<input class="form-control radius" id="route" type="text" name="route"
@@ -135,16 +134,16 @@
 				<div class="form-group">
 					<div class="col-md-12">
 
-						<h3>Content</h3>
-						<small class="text-muted">This is the HTML content of your page</small>
+						<h3>内容</h3>
+						<small class="text-muted">这个页面的 HTML 主体部分</small>
 
 						<ul class="nav nav-tabs" role="tablist" id="content-edit">
 							<li class="nav-item" role="presentation" class="active">
 								<a class="nav-link active" href="#content-write" aria-controls="home" role="tab"
-								   data-toggle="tab">Write</a>
+								   data-toggle="tab">编写</a>
 							</li>
 							<li class="nav-item" role="presentation">
-								<a class="nav-link preview-page" href="#">Preview</a>
+								<a class="nav-link preview-page" href="#">预览</a>
 							</li>
 						</ul>
 
@@ -157,7 +156,7 @@
 										<div class="btn-group">
 											<button type="button" class="btn btn-primary" id="media-button">
 												<i class="fas fa-camera-retro"></i>
-												Media Library
+												多媒体库
 											</button>
 										</div>
 									</div>
@@ -165,38 +164,38 @@
 									<span class="nav-link d-none d-md-block d-lg-block">|</span>
 
 									<div class="form-group pr-3">
-										Draft:
+										状态:
 										{% set draft = page is defined and page.draft == True %}
 										<select class="form-control custom-select" name="draft">
 											<option value="true" {% if draft == True %}selected{% endif %}>
-												True
+												草稿
 											</option>
 											<option value="false" {% if draft == False %}selected{% endif %}>
-												False
+												发布
 											</option>
 										</select>
 									</div>
 
 									<div class="form-group pr-3">
-										Hidden:
+										可见性:
 										{% set hidden = page is defined and page.hidden == True %}
 										<select class="form-control custom-select" name="hidden">
-											<option value="true" {% if hidden == True %}selected{% endif %}>True
+											<option value="true" {% if hidden == True %}selected{% endif %}>隐藏
 											</option>
-											<option value="false" {% if hidden == False %}selected{% endif %}>False
+											<option value="false" {% if hidden == False %}selected{% endif %}>可见
 											</option>
 										</select>
 									</div>
 
 									<div class="form-group pr-3">
-										Authentication Required:
+										权限验证:
 										{% set auth_required = page is defined and page.auth_required == True %}
 										<select class="form-control custom-select" name="auth_required">
 											<option value="true" {% if auth_required == True %}selected{% endif %}>
-												True
+												需要登录
 											</option>
 											<option value="false" {% if auth_required == False %}selected{% endif %}>
-												False
+												公开页面
 											</option>
 										</select>
 									</div>
@@ -221,9 +220,9 @@
 					<input name='nonce' type='hidden' value="{{ nonce }}">
 					<button class="btn btn-primary" id="save-page">
 						{% if page is defined %}
-							Update
+							保存
 						{% else %}
-							Save
+							创建
 						{% endif %}
 					</button>
 				</div>

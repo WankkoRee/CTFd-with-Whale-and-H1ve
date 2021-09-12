@@ -3,7 +3,7 @@
 {% block content %}
 <div class="jumbotron">
 	<div class="container">
-		<h1>Scoreboard</h1>
+		<h1>排行榜</h1>
 	</div>
 </div>
 <div class="container">
@@ -12,10 +12,10 @@
 			<table id="scoreboard" class="table table-striped">
 				<thead>
 					<tr>
-						<td width="10px"><b>Place</b></td>
-						<td><b>Team</b></td>
-						<td><b>Score</b></td>
-						<td><b>Visibility</b></td>
+						<td width="64px"><b>排名</b></td>
+						<td><b>用户名</b></td>
+						<td><b>得分</b></td>
+						<td><b>可见性</b></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,11 +42,11 @@
 						<td>
 						{% if standing.hidden %}
 							<button class="btn-sm btn-danger cursor-pointer scoreboard-toggle" type="submit"
-								data-account-id="{{ standing.account_id }}" data-state="hidden">Hidden
+								data-account-id="{{ standing.account_id }}" data-state="hidden">隐藏
 							</button>
 						{% else %}
 							<button class="btn-sm btn-success cursor-pointer scoreboard-toggle" type="submit"
-								data-account-id="{{ standing.account_id }}" data-state="visible">Visible
+								data-account-id="{{ standing.account_id }}" data-state="visible">可见
 							</button>
 						{% endif %}
 						</td>

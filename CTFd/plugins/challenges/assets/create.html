@@ -1,31 +1,31 @@
 <form method="POST" action="{{ script_root }}/admin/challenges/new" enctype="multipart/form-data">
 	<div class="form-group">
 		<label>
-			Name:<br>
+			名称<br>
 			<small class="form-text text-muted">
-				The name of your challenge
+				这个题目的名称
 			</small>
 		</label>
-		<input type="text" class="form-control" name="name" placeholder="Enter challenge name">
+		<input type="text" class="form-control" name="name" placeholder="在这输入名称">
 	</div>
 
 	<div class="form-group">
 		<label>
-			Category:<br>
+			分类<br>
 			<small class="form-text text-muted">
-				The category of your challenge
+				如:Misc、Web、Crypto、Reverse、PWN等
 			</small>
 		</label>
-		<input type="text" class="form-control" name="category" placeholder="Enter challenge category">
+		<input type="text" class="form-control" name="category" placeholder="在这输入分类">
 	</div>
 
 	<ul class="nav nav-tabs" role="tablist" id="new-desc-edit">
 		<li class="nav-item">
 			<a class="nav-link active" href="#new-desc-write" aria-controls="home" role="tab"
-			   data-toggle="tab" tabindex="-1">Write</a>
+			   data-toggle="tab" tabindex="-1">编写</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="#new-desc-preview" aria-controls="home" role="tab" data-toggle="tab" tabindex="-1">Preview</a>
+			<a class="nav-link" href="#new-desc-preview" aria-controls="home" role="tab" data-toggle="tab" tabindex="-1">预览</a>
 		</li>
 	</ul>
 
@@ -33,9 +33,9 @@
 		<div role="tabpanel" class="tab-pane active" id="new-desc-write">
 			<div class="form-group">
 				<label>
-					Message:<br>
+					描述<br>
 					<small class="form-text text-muted">
-						Use this to give a brief introduction to your challenge.
+						用简单的几句话介绍这个题目，支持 Markdown 和 HTML
 					</small>
 				</label>
 				<textarea id="new-desc-editor" class="form-control" name="description" rows="10"></textarea>
@@ -47,9 +47,9 @@
 
 	<div class="form-group">
 		<label>
-			Value:<br>
+			分值<br>
 			<small class="form-text text-muted">
-				This is how many points are rewarded for solving this challenge.
+				攻克这个题目可以得到的分值
 			</small>
 		</label>
 		<input type="number" class="form-control" name="value" placeholder="Enter value" required>
@@ -59,6 +59,6 @@
 	<input type="hidden" name="type" value="standard">
 
 	<div class="form-group">
-		<button class="btn btn-primary float-right create-challenge-submit" type="submit">Create</button>
+		<button class="btn btn-primary float-right create-challenge-submit" type="submit">创建</button>
 	</div>
 </form>

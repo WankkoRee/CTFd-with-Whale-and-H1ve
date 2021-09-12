@@ -1,20 +1,18 @@
 <div role="tabpanel" class="tab-pane config-section" id="email">
 	<form method="POST" autocomplete="off" class="w-100">
-		<h5>Email Content</h5>
+		<h5>邮件内容</h5>
 		<small class="form-text text-muted">
-			Customize CTFd emails with <a href="https://help.ctfd.io/configuration/emails/#email-content" target="_blank">predefined variables</a> and custom content
+			使用 <a href="https://help.ctfd.io/configuration/emails/#email-content" target="_blank">内部变量</a> 来自定义邮件内容
 		</small>
 		<ul class="nav nav-tabs mt-3" role="tablist">
 			<li class="nav-item active">
-				<a class="nav-link active" href="#confirmation-email-tab" role="tab" data-toggle="tab">
-					Confirmation
-				</a>
+				<a class="nav-link active" href="#confirmation-email-tab" role="tab" data-toggle="tab">完成注册</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#account-details-email-tab" role="tab" data-toggle="tab">Account Details</a>
+				<a class="nav-link" href="#account-details-email-tab" role="tab" data-toggle="tab">初始信息</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#password-reset-email-tab" role="tab" data-toggle="tab">Password Reset</a>
+				<a class="nav-link" href="#password-reset-email-tab" role="tab" data-toggle="tab">密码管理</a>
 			</li>
 		</ul>
 
@@ -22,19 +20,19 @@
 			<div role="tabpanel" class="tab-pane active" id="confirmation-email-tab">
 				<div class="form-group">
 					<label class="pt-3">
-						Account Registration<br>
+						注册成功<br>
 						<small class="form-text text-muted">
-							Email sent to users after they've registered their account entirely
+							在用户成功注册和验证(如有)后会发送此邮件
 						</small>
 					</label>
 					<div>
 						<label>
-							Subject
+							标题
 						</label>
 						<input class="form-control" id='successful_registration_email_subject' name='successful_registration_email_subject' type='text'
 							value="{{ successful_registration_email_subject or ''}}">
 						<label>
-							Body
+							内容
 						</label>
 						<textarea class="form-control" type="text" id="successful_registration_email_body" name="verification_email_body"
 							rows="5">{{ successful_registration_email_body or '' }}</textarea>
@@ -43,18 +41,18 @@
 
 				<div class="form-group">
 					<label class="pt-3">
-						Account Confirmation<br>
+						邮箱验证<br>
 						<small class="form-text text-muted">
-							Email sent to users to confirm their account
+							在开启邮箱验证且用户注册成功后会发送此邮件
 						</small>
 					</label>
 					<div>
 						<label>
-							Subject
+							标题
 						</label>
 						<input class="form-control" id='verification_email_subject' name='verification_email_subject' type='text' value="{{ verification_email_subject or ''}}">
 						<label>
-							Body
+							内容
 						</label>
 						<textarea class="form-control" type="text" id="verification_email_body" name="verification_email_body"
 							rows="5">{{ verification_email_body or '' }}</textarea>
@@ -64,19 +62,19 @@
 			<div role="tabpanel" class="tab-pane" id="account-details-email-tab">
 				<div class="form-group">
 					<label class="pt-3">
-						New Account Details<br>
+						新建账号的详细信息<br>
 						<small class="form-text text-muted">
-							Email sent to new users (created by an admin) with their initial account details
+							管理在后台创建账号并勾选发送详细信息后会发送此邮件
 						</small>
 					</label>
 					<div>
 						<label>
-							Subject
+							标题
 						</label>
 						<input class="form-control" id='user_creation_email_subject' name='user_creation_email_subject' type='text'
 							value="{{ user_creation_email_subject or ''}}">
 						<label>
-							Body
+							内容
 						</label>
 						<textarea class="form-control" type="text" id="user_creation_email_body" name="user_creation_email_body"
 							rows="5">{{ user_creation_email_body or '' }}</textarea>
@@ -86,19 +84,19 @@
 			<div role="tabpanel" class="tab-pane" id="password-reset-email-tab">
 				<div class="form-group">
 					<label class="pt-3">
-						Password Reset Request<br>
+						密码重置<br>
 						<small class="form-text text-muted">
-							Email sent whent a user requests a password reset
+							用户发起密码重置后会发送此邮件
 						</small>
 					</label>
 					<div>
 						<label>
-							Subject
+							标题
 						</label>
 						<input class="form-control" id='password_reset_subject' name='password_reset_subject' type='text'
 							value="{{ password_reset_subject or ''}}">
 						<label>
-							Body
+							内容
 						</label>
 						<textarea class="form-control" type="text" id="password_reset_body" name="password_reset_body"
 							rows="5">{{ password_reset_body or '' }}</textarea>
@@ -107,19 +105,19 @@
 
 				<div class="form-group">
 					<label class="pt-3">
-						Password Reset Confirmation<br>
+						修改密码通知<br>
 						<small class="form-text text-muted">
-							Email sent whent a user successfully resets their password
+							用户完成修改密码后会发送此邮件
 						</small>
 					</label>
 					<div>
 						<label>
-							Subject
+							标题
 						</label>
 						<input class="form-control" id='password_change_alert_subject' name='password_change_alert_subject' type='text'
 							value="{{ password_change_alert_subject or ''}}">
 						<label>
-							Body
+							内容
 						</label>
 						<textarea class="form-control" type="text" id="password_change_alert_body" name="password_change_alert_body"
 							rows="5">{{ password_change_alert_body or '' }}</textarea>
@@ -130,14 +128,13 @@
 
 		<hr class="my-5">
 
-		<h5>Email Server</h5>
+		<h5>邮箱服务器</h5>
 		<small class="form-text text-muted">
-			Change the email server used by CTFd to send email
+			不设置好的话无法使用发送邮件相关的功能
 		</small>
 		<ul class="nav nav-tabs my-3" role="tablist">
 			<li class="nav-item active">
-				<a class="nav-link active" href="#mailserver" role="tab" data-toggle="tab">Mail
-					Server</a>
+				<a class="nav-link active" href="#mailserver" role="tab" data-toggle="tab">服务器</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#mailgun" role="tab" data-toggle="tab">Mailgun</a>
@@ -146,9 +143,9 @@
 
 		<div class="form-group">
 			<label>
-				Mail From Address<br>
+				邮箱地址<br>
 				<small class="form-text text-muted">
-					Email address used to send email
+					用来发送的邮箱地址
 				</small>
 			</label>
 			<input class="form-control" id='mailfrom_addr' name='mailfrom_addr' type='text' {% if mailfrom_addr is defined and mailfrom_addr != None %}value="{{ mailfrom_addr }}"{% endif %}>
@@ -159,9 +156,9 @@
 
 				<div class="form-group">
 					<label>
-						Mail Server Address<br>
+						服务器地址<br>
 						<small class="form-text text-muted">
-							Mail Server Address
+							邮箱服务器的SMTP地址
 						</small>
 					</label>
 					<input class="form-control" id='mail_server' name='mail_server' type='text'
@@ -170,9 +167,9 @@
 
 				<div class="form-group">
 					<label>
-						Mail Server Port<br>
+						服务器端口<br>
 						<small class="form-text text-muted">
-							Mail Server Port
+							邮箱服务器的SMTP端口
 						</small>
 					</label>
 					<input class="form-control" id='mail_port' name='mail_port' type='text'
@@ -182,39 +179,39 @@
 					<label>
 						<input id="mail_useauth" name="mail_useauth" type="checkbox"
 							   {% if mail_useauth %}checked{% endif %}>
-						Use Mail Server Username and Password
+						服务器需要验证账号和密码
 					</label>
 				</div>
 				<div id="mail_username_password">
 					<div class="form-group">
 						<label>
-							Username<br>
+							账号<br>
 							<small class="form-text text-muted">
-								Mail Server Account Username
+								邮箱服务器的登录账号
 							</small>
 						</label>
 						{% if mail_username is defined and mail_username != None %}
 							<label>
-								<sup class="form-text text-muted">A mail server username is currently set</sup>
+								<sup class="form-text text-muted">此前已设置过此字段，但是我们不会给予显示</sup>
 							</label>
 						{% endif %}
 						<input class="form-control" id='mail_username' name='mail_username' autocomplete='off' type='text'>
 					</div>
 					<div class="form-group">
 						<label for="mail_password">
-							Password<br>
+							密码<br>
 							<small class="form-text text-muted">
-								Mail Server Account Password
+								邮箱服务器的登录密码
 							</small>
 						</label>
 						{% if mail_password is defined and mail_password != None %}
 							<label>
-								<sup class="form-text text-muted">An mail server password is currently set</sup>
+								<sup class="form-text text-muted">此前已设置过此字段，但是我们不会给予显示</sup>
 							</label>
 						{% endif %}
 						<input class="form-control" id='mail_password' name='mail_password' autocomplete='off' type='password'>
 					</div>
-					<sup>Uncheck setting and update to remove username and password</sup>
+					<sup>如果需要取消账号密码的设置请取消勾选上方的"服务器需要验证账号和密码"并保存</sup>
 					<br>
 					<br>
 				</div>
@@ -254,6 +251,6 @@
 				</div>
 			</div>
 		</div>
-		<button type="submit" class="btn btn-md btn-primary float-right">Update</button>
+		<button type="submit" class="btn btn-md btn-primary float-right">保存</button>
 	</form>
 </div>

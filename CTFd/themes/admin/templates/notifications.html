@@ -3,7 +3,7 @@
 {% block content %}
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Notifications</h1>
+			<h1>通知</h1>
 		</div>
 	</div>
 	<div class="container">
@@ -12,18 +12,18 @@
 				<form method="POST" id="notifications_form">
 					<div class="form-group">
 						<label>
-							Title
+							标题
 							<small class="form-text text-muted">
-								Notification title
+								就是通知的标题
 							</small>
 						</label>
 						<input class="form-control" type="text" name="title">
 					</div>
 					<div class="form-group">
 						<label>
-							Content
+							内容
 							<small class="form-text text-muted">
-								Notification contents can be made up of HTML
+								可以使用HTML
 							</small>
 						</label>
 						<textarea class="form-control" type="text" name="content" rows="3"></textarea>
@@ -32,9 +32,9 @@
 						<div class="col">
 							<div class="form-group">
 								<label>
-									Type
+									类型
 									<small class="form-text text-muted">
-										What type of notification users receive
+										希望用户收到的消息如何展现
 									</small>
 								</label>
 							</div>
@@ -54,20 +54,20 @@
 						<div class="col">
 							<div class="form-group">
 								<label>
-									Sound
+									提示音
 									<small class="form-text text-muted">
-										Play sound for users
+										用户是否应该听到提示音
 									</small>
 								</label>
 							</div>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" name="sound" value="true" id="sound-enable" checked>
-								<label class="form-check-label" for="sound-enable">Play Sound</label>
+								<label class="form-check-label" for="sound-enable">播放提示音</label>
 							</div>
 						</div>
 					</div>
 					<div class="float-right">
-						<button type="submit" class="btn btn-success text-center">Submit</button>
+						<button type="submit" class="btn btn-success text-center">保存</button>
 					</div>
 				</form>
 			</div>

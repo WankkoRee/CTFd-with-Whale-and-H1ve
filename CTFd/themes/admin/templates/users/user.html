@@ -8,7 +8,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h2 class="modal-action text-center w-100">Edit User</h2>
+				<h2 class="modal-action text-center w-100">编辑</h2>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -24,7 +24,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h2 class="modal-action text-center w-100">Award User</h2>
+				<h2 class="modal-action text-center w-100">奖励</h2>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -40,7 +40,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h2 class="modal-action text-center w-100">Email User</h2>
+				<h2 class="modal-action text-center w-100">发邮</h2>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -148,23 +148,23 @@
 				</div>
 			</div>
 		{% else %}
-			<h3 class="spinner-error text-center w-100">No solves yet</h3>
+			<h3 class="spinner-error text-center w-100">Ta很懒，没在这没写过任何题目</h3>
 		{% endif %}
 	</div>
 
 
 	<nav class="nav nav-tabs nav-fill pt-5" id="myTab" role="tablist">
 		<a class="nav-item nav-link active" id="nav-solves-tab" data-toggle="tab" href="#nav-solves" role="tab"
-		   aria-controls="nav-solves" aria-selected="true">Solves</a>
+		   aria-controls="nav-solves" aria-selected="true">已攻克</a>
 
 		<a class="nav-item nav-link" id="nav-wrong-tab" data-toggle="tab" href="#nav-wrong" role="tab"
-		   aria-controls="nav-wrong" aria-selected="false">Fails</a>
+		   aria-controls="nav-wrong" aria-selected="false">失败</a>
 
 		<a class="nav-item nav-link" id="nav-awards-tab" data-toggle="tab" href="#nav-awards" role="tab"
-		   aria-controls="nav-awards" aria-selected="false">Awards</a>
+		   aria-controls="nav-awards" aria-selected="false">奖励</a>
 
 		<a class="nav-item nav-link" id="nav-missing-tab" data-toggle="tab" href="#nav-missing" role="tab"
-		   aria-controls="nav-missing" aria-selected="false">Missing</a>
+		   aria-controls="nav-missing" aria-selected="false">未尝试</a>
 	</nav>
 
 	<div class="tab-content" id="nav-tabContent">
@@ -172,15 +172,15 @@
 			<div class="row">
 				<div class="col-md-12">
 					<table class="table table-striped">
-					<h3 class="text-center py-3 d-block">Solves</h3>
+					<h3 class="text-center py-3 d-block">已攻克</h3>
 					<thead>
 					<tr>
-						<td class="text-center"><b>Challenge</b></td>
-						<td class="text-center"><b>Submitted</b></td>
-						<td class="text-center"><b>Category</b></td>
-						<td class="text-center"><b>Value</b></td>
-						<td class="text-center"><b>Time</b></td>
-						<td class="text-center"><b>Delete</b></td>
+						<td class="text-center"><b>题目</b></td>
+						<td class="text-center"><b>flag</b></td>
+						<td class="text-center"><b>分类</b></td>
+						<td class="text-center"><b>分值</b></td>
+						<td class="text-center"><b>时间</b></td>
+						<td class="text-center"><b>管理</b></td>
 					</tr>
 					</thead>
 					<tbody>
@@ -200,7 +200,7 @@
 							<td class="text-center">
 								<span class="delete-submission" submission-id="{{ solve.id }}"
 									  submission-type="{{ solve.type }}" submission-challenge="{{ solve.challenge.name }}" data-toggle="tooltip"
-									  data-placement="top" title="Delete solve #{{ solve.id }}">
+									  data-placement="top" title="删除此次正确提交 #{{ solve.id }}">
 									<i class="btn-fa fas fa-times"></i>
 								</span>
 							</td>
@@ -216,13 +216,13 @@
 			<div class="row">
 				<div class="col-md-12">
 					<table class="table table-striped">
-					<h3 class="text-center py-3 d-block">Fails</h3>
+					<h3 class="text-center py-3 d-block">失败</h3>
 					<thead>
 					<tr>
-						<td class="text-center"><b>Challenge</b></td>
-						<td class="text-center"><b>Submitted</b></td>
-						<td class="text-center"><b>Time</b></td>
-						<td class="text-center"><b>Delete</b></td>
+						<td class="text-center"><b>题目</b></td>
+						<td class="text-center"><b>flag</b></td>
+						<td class="text-center"><b>时间</b></td>
+						<td class="text-center"><b>管理</b></td>
 					</tr>
 					</thead>
 					<tbody>
@@ -242,7 +242,7 @@
 							<td class="text-center">
 								<a class="delete-submission" submission-id="{{ fail.id }}"
 								   submission-type="{{ fail.type }}" submission-challenge="{{ fail.challenge.name }}" data-toggle="tooltip"
-									  data-placement="top" title="Delete fail #{{ fail.id }}">
+									  data-placement="top" title="删除此次错误提交 #{{ fail.id }}">
 									<i class="fas fa-times"></i>
 								</a>
 							</td>
@@ -258,16 +258,16 @@
 			<div class="row">
 				<div class="col-md-12">
 					<table class="table table-striped">
-						<h3 class="text-center py-3 d-block">Awards</h3>
+						<h3 class="text-center py-3 d-block">奖励</h3>
 						<thead>
 						<tr>
-							<td class="text-center"><b>Name</b></td>
-							<td class="text-center"><b>Description</b></td>
-							<td class="text-center"><b>Date</b></td>
-							<td class="text-center"><b>Value</b></td>
-							<td class="text-center"><b>Category</b></td>
-							<td class="text-center"><b>Icon</b></td>
-							<td class="text-center"><b>Delete</b></td>
+							<td class="text-center"><b>名称</b></td>
+							<td class="text-center"><b>描述</b></td>
+							<td class="text-center"><b>时间</b></td>
+							<td class="text-center"><b>分值</b></td>
+							<td class="text-center"><b>分类</b></td>
+							<td class="text-center"><b>图标</b></td>
+							<td class="text-center"><b>管理</b></td>
 						</tr>
 						</thead>
 						<tbody id="awards-body">
@@ -285,7 +285,7 @@
 								<td class="text-center">
 									<span class="delete-award" data-toggle="tooltip"
 										  data-placement="top" award-id="{{ award.id }}" award-name="{{ award.name }}"
-										  title="Delete award #{{ award.id }}">
+										  title="撤销此奖励 #{{ award.id }}">
 										<i class="fas fa-times"></i>
 									</span>
 								</td>
@@ -301,13 +301,13 @@
 			<div class="row">
 				<div class="col-md-12">
 					<table class="table table-striped">
-					<h3 class="text-center py-3 d-block">Missing</h3>
+					<h3 class="text-center py-3 d-block">未尝试</h3>
 					<thead>
 						<tr>
-							<td class="text-center"><b>Challenge</b></td>
-							<td class="text-center"><b>Category</b></td>
-							<td class="text-center"><b>Value</b></td>
-							<td class="text-center"><b>Mark Solved</b></td>
+							<td class="text-center"><b>题目</b></td>
+							<td class="text-center"><b>分类</b></td>
+							<td class="text-center"><b>分值</b></td>
+							<td class="text-center"><b>管理</b></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -323,7 +323,7 @@
 							<td class="text-center">
 								<a class="correct-submission" data-toggle="tooltip" challenge-id="{{ challenge.id }}"
 									  challenge-name="{{ challenge.name }}"
-									  data-placement="top" title="Mark {{ challenge.name }} correct for {{ user.name }}">
+									  data-placement="top" title="为 {{ user.name }} 标记 {{ challenge.name }} 为已攻克">
 									<i class="fas fa-check"></i>
 								</a>
 							</td>
@@ -339,11 +339,11 @@
 	<div class="row pt-5">
 		<div class="col-md-12">
 			<table class="table table-striped">
-				<h3 class="text-center">IP Addresses</h3>
+				<h3 class="text-center">IP</h3>
 				<thead>
 				<tr>
-					<td class="text-center"><b>IP Address</b></td>
-					<td class="text-center"><b>Last Seen</b></td>
+					<td class="text-center"><b>IP</b></td>
+					<td class="text-center"><b>最后活跃时间</b></td>
 				</tr>
 				</thead>
 				<tbody>

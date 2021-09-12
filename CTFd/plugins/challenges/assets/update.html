@@ -1,25 +1,25 @@
 <form method="POST">
 	<div class="form-group">
 		<label>
-			Name<br>
-			<small class="form-text text-muted">Challenge Name</small>
+			名称<br>
+			<small class="form-text text-muted">这个题目的名称</small>
 		</label>
 		<input type="text" class="form-control chal-name" name="name" value="{{ challenge.name }}">
 	</div>
 
 	<div class="form-group">
 		<label>
-			Category<br>
-			<small class="form-text text-muted">Challenge Category</small>
+			分类<br>
+			<small class="form-text text-muted">如:Misc、Web、Crypto、Reverse、PWN等</small>
 		</label>
 		<input type="text" class="form-control chal-category" name="category" value="{{ challenge.category }}">
 	</div>
 
 	<div class="form-group">
 		<label>
-			Message<br>
+			描述<br>
 			<small class="form-text text-muted">
-				Use this to give a brief introduction to your challenge.
+				用简单的几句话介绍这个题目，支持 Markdown 和 HTML
 			</small>
 		</label>
 		<textarea id="desc-editor" class="form-control chal-desc-editor" name="description" rows="10">{{ challenge.description }}</textarea>
@@ -27,9 +27,9 @@
 
 	<div class="form-group">
 		<label for="value">
-			Value<br>
+			分值<br>
 			<small class="form-text text-muted">
-				This is how many points teams will receive once they solve this challenge.
+				攻克这个题目可以得到的分值
 			</small>
 		</label>
 		<input type="number" class="form-control chal-value" name="value" value="{{ challenge.value }}" required>
@@ -37,8 +37,8 @@
 
 	<div class="form-group">
 		<label>
-			Max Attempts<br>
-			<small class="form-text text-muted">Maximum amount of attempts users receive. Leave at 0 for unlimited.</small>
+			最大尝试次数<br>
+			<small class="form-text text-muted">设为0则是不作限制</small>
 		</label>
 
 		<input type="number" class="form-control chal-attempts" name="max_attempts" value="{{ challenge.max_attempts }}">
@@ -46,19 +46,19 @@
 
 	<div class="form-group">
 		<label>
-			State<br>
-			<small class="form-text text-muted">Changes the state of the challenge (e.g. visible, hidden)</small>
+			可见性<br>
+			<small class="form-text text-muted">这个题目现在是否可见</small>
 		</label>
 
 		<select class="form-control custom-select" name="state">
-			<option value="visible" {% if challenge.state == "visible" %}selected{% endif %}>Visible</option>
-			<option value="hidden" {% if challenge.state == "hidden" %}selected{% endif %}>Hidden</option>
+			<option value="visible" {% if challenge.state == "visible" %}selected{% endif %}>可见</option>
+			<option value="hidden" {% if challenge.state == "hidden" %}selected{% endif %}>隐藏</option>
 		</select>
 	</div>
 
 	<div>
 		<button class="btn btn-success btn-outlined float-right" type="submit">
-			Update
+			保存
 		</button>
 	</div>
 </form>

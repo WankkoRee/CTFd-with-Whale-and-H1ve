@@ -6,7 +6,7 @@
 {% block content %}
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Users</h1>
+			<h1>同学</h1>
 		</div>
 	</div>
 	<div class="container">
@@ -15,10 +15,10 @@
 				<table class="table table-striped">
 					<thead>
 					<tr>
-						<td><b>User</b></td>
-						<td><b>Website</b></td>
-						<td class="d-none d-md-table-cell d-lg-table-cell"><b>Affiliation</b></td>
-						<td class="d-none d-md-table-cell d-lg-table-cell"><b>Country</b></td>
+						<td><b>用户名</b></td>
+						<td class="text-center"><b>网站</b></td>
+						<td class="d-none d-md-table-cell d-lg-table-cell"><b>联系方式</b></td>
+						<td class="d-none d-md-table-cell d-lg-table-cell"><b>国家/地区</b></td>
 					</tr>
 					</thead>
 					<tbody>
@@ -38,7 +38,7 @@
 									</a>
 								{% endif %}
 							</td>
-							<td class="text-center" style="width: 10px;">
+							<td class="text-center">
 								{% if user.website and (user.website.startswith('http://') or user.website.startswith('https://')) %}
 									<a href="{{ user.website }}" target="_blank">
 										<i class="fas fa-external-link-alt" data-toggle="tooltip" data-placement="top"

@@ -139,8 +139,8 @@ class CTFdStandardChallenge(BaseChallenge):
         flags = Flags.query.filter_by(challenge_id=challenge.id).all()
         for flag in flags:
             if get_flag_class(flag.type).compare(flag, submission):
-                return True, "Correct"
-        return False, "Incorrect"
+                return True, "对的嗷"
+        return False, "错了"
 
     @staticmethod
     def solve(user, team, challenge, request):

@@ -485,7 +485,7 @@ class ChallengeAttempt(Resource):
                 "success": True,
                 "data": {
                     "status": "already_solved",
-                    "message": "You already solved this",
+                    "message": "你已经交过正确的flag了，本次提交不会再判断对错嗷",
                 },
             }
 

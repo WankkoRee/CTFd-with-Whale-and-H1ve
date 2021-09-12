@@ -6,15 +6,15 @@
 {% block content %}
 <div class="jumbotron">
 	<div class="container">
-		<h1>Settings</h1>
+		<h1>账号设置</h1>
 	</div>
 </div>
 <div class="container">
 	<div class="row">
 		<div class="col-md-2 offset-md-1">
 			<div class="nav flex-column nav-pills" role="tablist">
-				<a class="nav-link active" id="settings-profile-tab" data-toggle="pill" href="#profile" role="tab">Profile</a>
-				<a class="nav-link" id="settings-tokens-tab" data-toggle="pill" href="#tokens" role="tab">Access Tokens</a>
+				<a class="nav-link active" id="settings-profile-tab" data-toggle="pill" href="#profile" role="tab">个人资料</a>
+				<a class="nav-link" id="settings-tokens-tab" data-toggle="pill" href="#tokens" role="tab">token</a>
 			</div>
 		</div>
 		<div class="col-md-8">
@@ -36,13 +36,13 @@
 						class="form-horizontal">
 						<div class="form-group">
 							<label for="name-input">
-								User Name
+								用户名
 							</label>
 							<input class="form-control" type="text" name="name" id="name-input" value="{{name}}" />
 						</div>
 						<div class="form-group">
 							<label for="email-input">
-								Email
+								邮箱
 							</label>
 							<input class="form-control" type="email" name="email" id="email-input" value="{{email}}" />
 						</div>
@@ -51,13 +51,13 @@
 
 						<div class="form-group">
 							<label for="confirm-input">
-								Current Password
+								当前密码
 							</label>
 							<input class="form-control" type="password" name="confirm" id="confirm-input" />
 						</div>
 						<div class="form-group">
 							<label for="password-input">
-								New Password
+								新密码
 							</label>
 							<input class="form-control" type="password" name="password" id="password-input" />
 						</div>
@@ -66,21 +66,21 @@
 
 						<div class="form-group">
 							<label for="affiliation-input">
-								Affiliation
+								联系方式
 							</label>
 							<input class="form-control" type="text" name="affiliation" id="affiliation-input"
 								value="{% if affiliation %}{{affiliation}}{% endif %}" />
 						</div>
 						<div class="form-group">
 							<label for="website-input">
-								Website
+								网站
 							</label>
 							<input class="form-control" type="url" name="website" id="website-input"
 								value="{% if website %}{{website}}{% endif %}" />
 						</div>
 						<div class="form-group">
 							<label for="country-input">
-								Country
+								国家/地区
 							</label>
 							<select class="form-control custom-select" id="country-input" name="country">
 								<option value=""></option>
@@ -96,7 +96,7 @@
 						</div>
 
 						<div class="form-group">
-							<button type="submit" tabindex="0" class="btn btn-md btn-primary btn-outlined float-right">Submit</button>
+							<button type="submit" tabindex="0" class="btn btn-md btn-primary btn-outlined float-right">保存</button>
 						</div>
 					</form>
 				</div>
@@ -104,26 +104,26 @@
 					<form method="POST"id="user-token-form">
 						<div class="form-group">
 							<label for="name-input">
-								Expiration
+								过期时间
 							</label>
 							<input class="form-control" type="date" name="expiration" id="expiration-input" />
 						</div>
 
 						<div class="form-group text-right">
-							<button type="submit" class="btn btn-md btn-primary btn-outlined">Generate</button>
+							<button type="submit" class="btn btn-md btn-primary btn-outlined">生成</button>
 						</div>
 					</form>
 
 					{% if tokens %}
 					<hr>
-					<h4>Active Tokens</h4>
+					<h4>当前token</h4>
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<td class="text-center"><b>Type</b></td>
-								<td class="text-center"><b>Created</b></td>
-								<td class="text-center"><b>Expiration</b></td>
-								<td class="text-center"><b>Delete</b></td>
+								<td class="text-center"><b>类型</b></td>
+								<td class="text-center"><b>创建时间</b></td>
+								<td class="text-center"><b>过期时间</b></td>
+								<td class="text-center"><b>删除</b></td>
 							</tr>
 						</thead>
 						<tbody>
