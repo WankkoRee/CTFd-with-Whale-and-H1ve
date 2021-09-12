@@ -1,0 +1,151 @@
+<form method="POST" action="{{ script_root }}/admin/chal/new" enctype="multipart/form-data">
+	<div class="form-group">
+		<div class="alert alert-secondary" role="alert">
+			动态容器题目可以通过部署Docker来镜像环境隔离和动态flag
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="name">名称<br>
+			<small class="form-text text-muted">
+				这个题目的名称
+			</small>
+		</label>
+		<input type="text" class="form-control" name="name" placeholder="在这输入名称">
+	</div>
+	<div class="form-group">
+		<label for="category">分类<br>
+			<small class="form-text text-muted">
+				如:Misc、Web、Crypto、Reverse、PWN等
+			</small>
+		</label>
+		<input type="text" class="form-control" name="category" placeholder="在这输入分类">
+	</div>
+
+	<ul class="nav nav-tabs" role="tablist" id="new-desc-edit">
+		<li class="nav-item">
+			<a class="nav-link active" href="#new-desc-write" aria-controls="home" role="tab"
+			   data-toggle="tab">编写</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#new-desc-preview" aria-controls="home" role="tab" data-toggle="tab">预览</a>
+		</li>
+	</ul>
+
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="new-desc-write">
+			<div class="form-group">
+				<label for="message-text" class="control-label">描述
+					<small class="form-text text-muted">
+						用简单的几句话介绍这个题目，支持 Markdown 和 HTML
+					</small>
+				</label>
+				<textarea id="new-desc-editor" class="form-control" name="description" rows="10"></textarea>
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane content" id="new-desc-preview" style="height:234px; overflow-y: scroll;">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="value">初始分值<br>
+			<small class="form-text text-muted">
+				这个题目刚开始具有多少分值
+			</small>
+		</label>
+		<input type="number" class="form-control" name="value" placeholder="输入一个整数" required>
+
+	</div>
+
+	<div class="form-group">
+		<label for="value">衰减基数<br>
+			<small class="form-text text-muted">
+				这个题目达到最小分值时攻克这个题目的人数
+			</small>
+		</label>
+		<input type="number" class="form-control" name="decay" placeholder="输入一个整数" required>
+	</div>
+
+	<div class="form-group">
+		<label for="value">最小分值<br>
+			<small class="form-text text-muted">
+				这个题目最终保底具有多少分值
+			</small>
+		</label>
+		<input type="number" class="form-control" name="minimum" placeholder="输入一个整数" required>
+
+	</div>
+
+    <div class="form-group">
+		<label for="value">Docker镜像<br>
+			<small class="form-text text-muted">
+				用来部署题目的镜像地址
+			</small>
+		</label>
+		<input type="text" class="form-control" name="docker_image" placeholder="在这里输入镜像地址" required>
+
+	</div>
+
+    <div class="form-group">
+		<label for="value">Frp转发类型<br>
+			<small class="form-text text-muted">
+				设定转发的流量是何种类型
+			</small>
+		</label>
+
+        <select class="form-control" name="redirect_type">
+            <option value="http" selected>HTTP</option>
+            <option value="direct">Direct</option>
+        </select>
+	</div>
+
+    <div class="form-group">
+		<label for="value">Frp转发端口<br>
+			<small class="form-text text-muted">
+				题目的入口端口
+			</small>
+		</label>
+		<input type="number" class="form-control" name="redirect_port" placeholder="在这里输入端口" required>
+
+	</div>
+
+    <div class="form-group">
+		<label for="value">容器内存限制<br>
+			<small class="form-text text-muted">
+				内存的最大使用情况
+			</small>
+		</label>
+		<input type="text" class="form-control" name="memory_limit" placeholder="输入一个容量" value="128m" required>
+
+	</div>
+
+    <div class="form-group">
+		<label for="value">容器运算限制<br>
+			<small class="form-text text-muted">
+				CPU的最大使用情况
+			</small>
+		</label>
+		<input type="number" class="form-control" name="cpu_limit" placeholder="输入一个0~1的小数" value="0.5" required>
+
+	</div>
+
+	<input type="hidden" name="state" value="hidden">
+	<input type="hidden" value="dynamic_docker" name="type" id="chaltype">
+
+    <div class="form-group">
+		<label for="value">分值类型<br>
+			<small class="form-text text-muted">
+				定义分值的计算方式
+			</small>
+		</label>
+
+        <select class="form-control" name="dynamic_score">
+            <option value="0" selected>静态分值</option>
+            <option value="1">动态分值</option>
+        </select>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary float-right create-challenge-submit" type="submit">创建</button>
+	</div>
+</form>

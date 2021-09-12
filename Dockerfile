@@ -2,26 +2,28 @@ FROM python:3.7-alpine
 WORKDIR /opt/CTFd
 RUN mkdir -p /opt/CTFd /var/log/CTFd /var/uploads
 
-RUN apk update && \
-    apk add \
-        python \
-        python-dev \
+RUN echo http://mirrors.aliyun.com/alpine/v3.12/main/ > /etc/apk/repositories && \
+    apk update
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
+RUN apk add \
         linux-headers \
         libffi-dev \
         gcc \
         make \
+        g++ \
         musl-dev \
-        py-pip \
         mysql-client \
         git \
         openssl-dev
 
 COPY . /opt/CTFd
 
-RUN pip install -r requirements.txt
+RUN pip install -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com -r requirements.txt
 RUN for d in CTFd/plugins/*; do \
         if [ -f "$d/requirements.txt" ]; then \
-            pip install -r $d/requirements.txt; \
+            pip install -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com -r $d/requirements.txt; \
         fi; \
     done;
 

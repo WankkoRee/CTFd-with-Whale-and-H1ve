@@ -1,0 +1,180 @@
+<form method="POST">
+	<div class="form-group">
+		<label for="name">名称<br>
+			<small class="form-text text-muted">
+				这个题目的名称
+			</small>
+		</label>
+		<input type="text" class="form-control chal-name" name="name" value="{{ challenge.name }}">
+	</div>
+	<div class="form-group">
+		<label for="category">分类<br>
+			<small class="form-text text-muted">
+				如:Misc、Web、Crypto、Reverse、PWN等
+			</small>
+		</label>
+		<input type="text" class="form-control chal-category" name="category" value="{{ challenge.category }}">
+	</div>
+
+	<ul class="nav nav-tabs" role="tablist" id="desc-edit">
+		<li class="nav-item">
+			<a class="nav-link active" href="#desc-write" id="desc-write-link" aria-controls="home"
+			   role="tab" data-toggle="tab">
+				编写
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#desc-preview" aria-controls="home" role="tab" data-toggle="tab">
+				预览
+			</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="desc-write">
+			<div class="form-group">
+				<label for="message-text" class="control-label">描述<br>
+					<small class="form-text text-muted">
+						用简单的几句话介绍这个题目，支持 Markdown 和 HTML
+					</small>
+				</label>
+				<textarea id="desc-editor" class="form-control chal-desc-editor" name="description"
+						  rows="10">{{ challenge.description }}</textarea>
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane content" id="desc-preview"
+			 style="height:214px; overflow-y: scroll;">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="value">当前分值<br>
+			<small class="form-text text-muted">
+				这个题目现在具有多少分值
+			</small>
+		</label>
+		<input type="number" class="form-control chal-value" name="value" value="{{ challenge.value }}" disabled>
+	</div>
+
+	<div class="form-group">
+		<label for="value">初始分值<br>
+			<small class="form-text text-muted">
+				这个题目刚开始具有多少分值
+			</small>
+		</label>
+		<input type="number" class="form-control chal-initial" name="initial" value="{{ challenge.initial }}" required>
+	</div>
+
+	<div class="form-group">
+		<label for="value">衰减基数<br>
+			<small class="form-text text-muted">
+				这个题目达到最小分值时攻克这个题目的人数
+			</small>
+		</label>
+		<input type="number" class="form-control chal-decay" name="decay" value="{{ challenge.decay }}" required>
+	</div>
+
+	<div class="form-group">
+		<label for="value">最小分值<br>
+			<small class="form-text text-muted">
+				这个题目最终保底具有多少分值
+			</small>
+		</label>
+		<input type="number" class="form-control chal-minimum" name="minimum" value="{{ challenge.minimum }}" required>
+	</div>
+
+	<div class="form-group">
+		<label>
+			最大尝试次数<br>
+			<small class="form-text text-muted">设为0则是不作限制</small>
+		</label>
+
+		<input type="number" class="form-control chal-attempts" name="max_attempts"
+			   value="{{ challenge.max_attempts }}">
+	</div>
+
+	<div class="form-group">
+		<label>
+			可见性<br>
+			<small class="form-text text-muted">这个题目现在是否可见</small>
+		</label>
+
+		<select class="form-control" name="state">
+			<option value="visible" {% if challenge.state == "visible" %}selected{% endif %}>可见</option>
+			<option value="hidden" {% if challenge.state == "hidden" %}selected{% endif %}>隐藏</option>
+		</select>
+	</div>
+
+    <div class="form-group">
+		<label for="value">Docker镜像<br>
+			<small class="form-text text-muted">
+				用来部署题目的镜像地址
+			</small>
+		</label>
+		<input type="text" class="form-control" name="docker_image" placeholder="Enter docker image name"
+               required value="{{ challenge.docker_image }}">
+
+	</div>
+
+    <div class="form-group">
+		<label for="value">Frp转发类型<br>
+			<small class="form-text text-muted">
+				设定转发的流量是何种类型
+			</small>
+		</label>
+
+        <select class="form-control" name="redirect_type">
+            <option value="http" {% if challenge.redirect_type == "http" %}selected{% endif %}>HTTP</option>
+            <option value="direct" {% if challenge.redirect_type == "direct" %}selected{% endif %}>Direct</option>
+        </select>
+	</div>
+
+    <div class="form-group">
+		<label for="value">Frp转发端口<br>
+			<small class="form-text text-muted">
+				题目的入口端口
+			</small>
+		</label>
+		<input type="number" class="form-control" name="redirect_port" placeholder="Enter the port you want to open"
+               required value="{{ challenge.redirect_port }}">
+
+	</div>
+
+    <div class="form-group">
+		<label for="value">容器内存限制<br>
+			<small class="form-text text-muted">
+				内存的最大使用情况
+			</small>
+		</label>
+		<input type="text" class="form-control" name="memory_limit" placeholder="Enter the memory limit" value="{{ challenge.memory_limit }}" required>
+
+	</div>
+
+    <div class="form-group">
+		<label for="value">容器运算限制<br>
+			<small class="form-text text-muted">
+				CPU的最大使用情况
+			</small>
+		</label>
+		<input type="number" class="form-control" name="cpu_limit" placeholder="Enter the cpu limit" value="{{ challenge.cpu_limit }}" required>
+
+	</div>
+
+    <div class="form-group">
+		<label for="value">分值类型<br>
+			<small class="form-text text-muted">
+				定义分值的计算方式
+			</small>
+		</label>
+
+        <select class="form-control" name="dynamic_score">
+            <option value="0" {% if challenge.dynamic_score == 0 %}selected{% endif %}>静态分值</option>
+            <option value="1" {% if challenge.dynamic_score == 1 %}selected{% endif %}>动态分值</option>
+        </select>
+	</div>
+
+	<div>
+		<button class="btn btn-success btn-outlined float-right" type="submit">
+			保存
+		</button>
+	</div>
+</form>
