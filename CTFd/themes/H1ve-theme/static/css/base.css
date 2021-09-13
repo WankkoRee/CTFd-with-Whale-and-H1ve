@@ -162,3 +162,7 @@ select.form-control {
 #challenge-window .row {
   margin: 0;
 }
+
+#challenge-window .card {
+  background: #333;
+}

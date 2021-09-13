@@ -45,8 +45,14 @@ submit = function (cb, preview) {
 CTFd._internal = {};
 window.challenge = {};
 CTFd._internal.challenge = window.challenge;
-CTFd.lib = {};
-CTFd.lib.markdown = function(){};
+CTFd.lib = {
+  markdown: function(){}
+};
+CTFd.ui = {
+  ezq: {
+    ezAlert: ezal
+  }
+};
 
 function loadchal(id) {
   var obj = $.grep(challenges, function(e) {
