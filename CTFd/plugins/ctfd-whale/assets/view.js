@@ -230,7 +230,6 @@ CTFd._internal.challenge.boot = function() {
     });
 };
 
-
 CTFd._internal.challenge.submit = function(preview) {
     var challenge_id = parseInt($('#challenge-id').val())
     var submission = $('#submission-input').val()
