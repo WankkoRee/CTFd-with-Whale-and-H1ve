@@ -453,7 +453,7 @@ function getsolves(id) {
     response
   ) {
     var data = response.data;
-    $(".challenge-solves").text(parseInt(data.length) + (parseInt(t.length) === 0 ? " 人解出这题，快冲" : " 人已解出"));
+    $(".challenge-solves").text(parseInt(data.length) + (parseInt(data.length) === 0 ? " 人解出这题，快冲" : " 人已解出"));
     var box = $("#challenge-solves-names");
     box.empty();
     for (var i = 0; i < data.length; i++) {
