@@ -17,20 +17,20 @@
 
         //scrolling to the top code start
         $("#to-top").click(function(){
-            $("html, body").animate({
+            $(".section-content").animate({
                 scrollTop:0
             },500);
             return false;
         });
         function appearScroller() {
-            if($(window).scrollTop() > 50){
+            if($(".section-content").scrollTop() > 50){
                 $("#to-top").addClass("active");
             } else {
                 $("#to-top").removeClass("active");
             }
         }
         appearScroller();
-        $(window).scroll(function(){
+        $(".section-content").scroll(function(){
             appearScroller();
         });
         //scrolling to the top code end
