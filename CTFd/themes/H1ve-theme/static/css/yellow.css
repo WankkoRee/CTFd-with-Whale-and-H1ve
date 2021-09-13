@@ -7483,8 +7483,8 @@ body {
 .section {
   position: relative;
 }
-.section-inner:before {
-  content: "";
+.section-inner {
+  height: calc(100% - 20px);
   position: absolute;
   top: 10px;
   left: 10px;
@@ -7492,6 +7492,15 @@ body {
   bottom: 10px;
   border: 3px solid #c9cacc;
   background-color: rgba(0,0,0,0.4);
+}
+.section-content {
+  height: 100%;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.section-content::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
 }
 .section-inner .container {
   position: relative;
