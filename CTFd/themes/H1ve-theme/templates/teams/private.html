@@ -269,7 +269,7 @@
 					<thead>
 					<tr>
 						<td><b>题目</b></td>
-						<td class="d-none d-md-block d-lg-block"><b>分类</b></td>
+						<td><b>分类</b></td>
 						<td><b>分值</b></td>
 						<td><b>时间</b></td>
 					</tr>
@@ -280,7 +280,7 @@
 							<td>
 								<a href="{{ url_for('challenges.listing') }}#{{ solve.challenge.name }}">{{ solve.challenge.name }}</a>
 							</td>
-							<td class="d-none d-md-block d-lg-block">{{ solve.challenge.category }}</td>
+							<td>{{ solve.challenge.category }}</td>
 							<td>{{ solve.challenge.value }}</td>
 							<td class="solve-time">
 								<script>document.write(moment("{{ solve.date|isoformat }}").local().format('MMMM Do, h:mm:ss A'))</script>
