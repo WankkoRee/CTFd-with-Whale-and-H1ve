@@ -1,82 +1,66 @@
-![](https://github.com/CTFd/CTFd/blob/master/CTFd/themes/core/static/img/logo.png?raw=true)
-====
+## CTFd with Whale and H1ve
 
-[![Build Status](https://travis-ci.org/CTFd/CTFd.svg?branch=master)](https://travis-ci.org/CTFd/CTFd)
-[![MajorLeagueCyber Discourse](https://img.shields.io/discourse/status?server=https%3A%2F%2Fcommunity.majorleaguecyber.org%2F)](https://community.majorleaguecyber.org/)
-[![Documentation Status](https://readthedocs.org/projects/ctfd/badge/?version=latest)](https://docs.ctfd.io/en/latest/?badge=latest)
+本项目是由于历史遗留问题而产生的变通解决方案，实现了在装有`CTFd-Whale`的`CTFd 2.3.2`上使用`H1ve`主题。
 
-## What is CTFd?
-CTFd is a Capture The Flag framework focusing on ease of use and customizability. It comes with everything you need to run a CTF and it's easy to customize with plugins and themes.
+因为校内平台已经在用远古版本`2.3.2`的`CTFd`，且已经有一些魔改，不太好平滑升级版本，但看着`H1ve`主题特别眼馋，所以花了一天时间把`H1ve`主题给适配到了老版本上，不过因为功能相关的代码在版本上差异过大，所以只是适配了主题，并没有作功能上的迁移。
 
-![CTFd is a CTF in a can.](https://github.com/CTFd/CTFd/blob/master/CTFd/themes/core/static/img/scoreboard.png?raw=true)
+## 相关项目
 
-## Features
- * Create your own challenges, categories, hints, and flags from the Admin Interface
-    * Dynamic Scoring Challenges
-    * Unlockable challenge support
-    * Challenge plugin architecture to create your own custom challenges
-    * Static & Regex based flags
-        * Custom flag plugins
-    * Unlockable hints
-    * File uploads to the server or an Amazon S3-compatible backend
-    * Limit challenge attempts & hide challenges
-    * Automatic bruteforce protection
-* Individual and Team based competitions
-    * Have users play on their own or form teams to play together
- * Scoreboard with automatic tie resolution
-    * Hide Scores from the public
-    * Freeze Scores at a specific time
- * Scoregraphs comparing the top 10 teams and team progress graphs
- * Markdown content management system
- * SMTP + Mailgun email support
-    * Email confirmation support
-    * Forgot password support
- * Automatic competition starting and ending
- * Team management, hiding, and banning
- * Customize everything using the [plugin](https://github.com/CTFd/CTFd/wiki/Plugins) and [theme](https://github.com/CTFd/CTFd/tree/master/CTFd/themes) interfaces
- * Importing and Exporting of CTF data for archival
- * And a lot more...
+1. [CTFd/CTFd](https://github.com/CTFd/CTFd)
+2. [glzjin/CTFd-Whale](https://github.com/glzjin/CTFd-Whale)
+3. [D0g3-Lab/H1ve](https://github.com/D0g3-Lab/H1ve)
 
-## Install
-  1. Install dependencies: `pip install -r requirements.txt`
-       1. You can also use the `prepare.sh` script to install system dependencies using apt.
-  2. Modify [CTFd/config.py](https://github.com/CTFd/CTFd/blob/master/CTFd/config.py) to your liking.
-  3. Use `flask run` in a terminal to drop into debug mode.
+## 特性
 
-You can use the auto-generated Docker images with the following command:
+1. CTFd原生主题汉化程度99%（前端`core`和后端`admin`）
+2. 前端主题几乎完全汉化
+3. 修复了主题的一些显示异常和不合理的视觉逻辑
+4. 汉化主要针对校内平台，所以带有一些俏皮话和非通用称谓
+5. 保证`CTFd-whale`的易用性
 
-`docker run -p 8000:8000 -it ctfd/ctfd`
+## 安装
 
-Or you can use Docker Compose with the following command from the source repository:
+1. 拉取项目
 
-`docker-compose up`
+   ```shell
+   git clone https://github.com/WankkoRee/CTFd-with-Whale-and-H1ve.git
+   ```
 
-Check out the [wiki](https://github.com/CTFd/CTFd/wiki) for [deployment options](https://github.com/CTFd/CTFd/wiki/Basic-Deployment) and the [Getting Started](https://github.com/CTFd/CTFd/wiki/Getting-Started) guide
+2. 安装`docker`和`docker compose`
 
-## Live Demo
-https://demo.ctfd.io/
+   由于不同系统的安装命令并不一样，请自行安装
 
-## Support
-To get basic support, you can join the [MajorLeagueCyber Community](https://community.majorleaguecyber.org/): [![MajorLeagueCyber Discourse](https://img.shields.io/discourse/status?server=https%3A%2F%2Fcommunity.majorleaguecyber.org%2F)](https://community.majorleaguecyber.org/)
+3. 按需修改各种环境配置
 
-If you prefer commercial support or have a special project, feel free to [contact us](https://ctfd.io/contact/).
+   其中有对应关系的参数如下：
 
-## Managed Hosting
-Looking to use CTFd but don't want to deal with managing infrastructure? Check out [the CTFd website](https://ctfd.io/) for managed CTFd deployments.
+   1. `frp/frpc.ini`中的`token`应和`frp/frps.ini`中的`token`一致。
+   2. `frp/frpc.ini`中的`server_addr`应和`docker-compose.yml`中的`services.frps.networks.frp.ipv4_address`一致。
+   3. `frp/frpc.ini`中的`server_port`应和`frp/frps.ini`中的`bind_port`以及`docker-compose.yml`中的`services.frps.ports[1]`一致。
+   4. `frp/frpc.ini`中的`admin_addr`应和`docker-compose.yml`中的`services.frpc.networks.frp.ipv4_address`以及`CTF-Whale`后台设置中的`Frp API IP`一致。
+   5. `frp/frpc.ini`中的`admin_port`应和`CTF-Whale`后台设置中的`Frp API Port`一致。
+   6. `frp/frps.ini`中的`vhost_http_port`应和`docker-compose.yml`中的`services.frps.ports[0]`一致。
+   7. `frp/frps.ini`中的`subdomain_host`应和`CTF-Whale`后台设置中的`Frp Http Domain Suffix`一致。
+   8. `CTF-Whale`后台设置中的`Frp Http Port`仅和前端的题目容器地址显示有关。
+   9. 整个`frp/frpc.ini`文件内容应和`CTF-Whale`后台设置中的`Frp config template`一致。
+   10. `CTF-Whale`后台设置中的`Docker Auto Connect Containers`应为`frpc`容器的名字，通常为`ctfd_frpc_1`。
+   11. `CTF-Whale`后台设置中的`Docker Auto Connect Network`应为`frp_containers`网络的名字，通常为`ctfd_frp_containers`。
+   12. `CTF-Whale`后台设置中的`Docker Swarm Nodes`通常为`linux-1`。
 
-## MajorLeagueCyber
-CTFd is heavily integrated with [MajorLeagueCyber](https://majorleaguecyber.org/). MajorLeagueCyber (MLC) is a CTF stats tracker that provides event scheduling, team tracking, and single sign on for events.
+   本项目的动态题目容器配置基于域名访问，多容器子网、通过IP+端口访问因无需求未进行调试，如有需求请自行配置。
 
-By registering your CTF event with MajorLeagueCyber users can automatically login, track their individual and team scores, submit writeups, and get notifications of important events.
+4. 启动项目
 
-To integrate with MajorLeagueCyber, simply register an account, create an event, and install the client ID and client secret in the relevant portion in `CTFd/config.py` or in the admin panel:
+   ```shell
+   cd CTFd-with-Whale-and-H1ve
+   docker-compose up -d
+   ```
 
-```python
-OAUTH_CLIENT_ID = None
-OAUTH_CLIENT_SECRET = None
-```
+5. 配置反向代理实现服务对用户透明化
 
-## Credits
- * Logo by [Laura Barbera](http://www.laurabb.com/)
- * Theme by [Christopher Thompson](https://github.com/breadchris)
- * Notification Sound by [Terrence Martin](https://soundcloud.com/tj-martin-composer)
+   1. 将`abc.com`和`*.abc.com`解析至目标服务器（当然也可以是子域名，如`ctf.abc.com`和`*.ctf.abc.com`）
+   2. 在`nginx`中，将`abc.com`反向代理至`http://127.0.0.1:8000`，其中端口应当和`docker-compose.yml`中的`services.ctfd.ports`一致。
+   3. 在`nginx`中，将`*.abc.com`反向代理至`http://127.0.0.1:1638`，其中端口应当和`docker-compose.yml`中的`services.frps.ports[0]`一致。
+   4. 尝试访问`abc.com`，此时应当可以进入`CTFd`初始化页面。（请确保`80`和`443`端口已放行）
+   5. 参照第3步配置好`CTFd-Whale`后，尝试启动容器题目，此时题目应当可以正常启动和访问。（首次启动需要拉取题目镜像，会稍慢）
+
