@@ -2,18 +2,11 @@ var challenges;
 var user_solves = [];
 var templates = {};
 
-window.challenge = {};
-window.challenge.data = undefined;
-window.challenge.renderer = new markdownit({
+renderer = new markdownit({
     html: true,
     linkify: true,
 });
-window.challenge.preRender = function () {};
-window.challenge.render = function (markdown) {
-    return window.challenge.renderer.render(markdown);
-};
-window.challenge.postRender = function () {};
-window.challenge.submit = function (cb, preview) {
+submit = function (cb, preview) {
     var challenge_id = parseInt($('#challenge-id').val());
     var submission = $('#submission-input').val();
     var url = "/api/v1/challenges/attempt";
@@ -49,6 +42,11 @@ window.challenge.submit = function (cb, preview) {
         cb(response);
     });
 };
+CTFd._internal = {};
+window.challenge = {};
+CTFd._internal.challenge = window.challenge;
+CTFd.lib = {};
+CTFd.lib.markdown = function(){};
 
 function loadchal(id) {
   var obj = $.grep(challenges, function(e) {
@@ -83,6 +81,8 @@ function updateChalWindow(obj) {
       $.get(script_root + obj.template, function(template_data) {
         $("#challenge-window").empty();
         var template = nunjucks.compile(template_data);
+        window.challenge.renderer = renderer;
+        window.challenge.submit = submit;
         window.challenge.data = challenge_data;
         window.challenge.preRender();
 
