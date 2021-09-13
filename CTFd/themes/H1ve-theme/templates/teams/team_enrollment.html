@@ -4,37 +4,42 @@
 {% endblock %}
 
 {% block content %}
-<div class="section section-standard" id="users">
-	<div class="section-inner">
-	    <div class="container">
-	        <div class="section-header" data-100p-top="transform[swing]:translateY(-25px);opacity[swing]:0" data-75p-top="transform[swing]:translateY(0);opacity[swing]:1">
-	            <h3>Teams</h3>
-	            <div class="divider">//</div>
-	        </div>
-            <div class="row">
-                <div class="col-md-6 offset-md-3 text-center">
-                    <p>Welcome to {{ get_ctf_name() }}!</p>
-                    <p>
-                        In order to participate you must either join or create a team.
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 offset-md-3 text-center">
-                    <a class="btn btn-primary w-100" href="{{ url_for('auth.oauth_login') }}">Play with Official Team</a>
-                </div>
-            </div>
-            <div class="row pt-3">
-			<div class="col-md-3 offset-md-3 text-center">
-				<a class="btn btn-light w-100" href="{{ url_for('teams.join') }}">Join Unofficial Team</a>
-			</div>
-			<div class="col-md-3 text-center">
-				<a class="btn btn-light w-100" href="{{ url_for('teams.new') }}">Create Unofficial Team</a>
-			</div>
+	<div class="section-header" data-100p-top="transform[swing]:translateY(-25px);opacity[swing]:0" data-75p-top="transform[swing]:translateY(0);opacity[swing]:1">
+		<h3>队伍</h3>
+		<div class="divider">//</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 offset-md-3 text-center">
+			<p>欢迎来到 {{ get_ctf_name() }}!</p>
+			<p>
+				想要参加比赛么？加入或创建一个队伍吧！
+			</p>
 		</div>
-        </div>
-    </div>
-</div>
+	</div>
+	{% if integrations.mlc() %}
+	<div class="row">
+		<div class="col-md-6 offset-md-3 text-center">
+			<a class="btn btn-primary w-100" href="{{ url_for('auth.oauth_login') }}">Play with Official Team</a>
+		</div>
+	</div>
+	<div class="row pt-3">
+		<div class="col-md-3 offset-md-3 text-center">
+			<a class="btn btn-light w-100" href="{{ url_for('teams.join') }}">Join Unofficial Team</a>
+		</div>
+		<div class="col-md-3 text-center">
+			<a class="btn btn-light w-100" href="{{ url_for('teams.new') }}">Create Unofficial Team</a>
+		</div>
+	</div>
+	{% else %}
+	<div class="row pt-3">
+		<div class="col-md-3 offset-md-3 text-center">
+			<a class="btn btn-primary w-100" href="{{ url_for('teams.join') }}">加入队伍</a>
+		</div>
+		<div class="col-md-3 text-center">
+			<a class="btn btn-primary w-100" href="{{ url_for('teams.new') }}">创建队伍</a>
+		</div>
+	</div>
+	{% endif %}
 {% endblock %}
 
 {% block scripts %}

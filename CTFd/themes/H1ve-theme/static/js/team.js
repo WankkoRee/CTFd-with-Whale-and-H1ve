@@ -48,6 +48,7 @@ function scoregraph() {
               paper_bgcolor: "rgba(0,0,0,0)",
               plot_bgcolor: "rgba(0,0,0,0)",
               hovermode: "closest",
+              font : {'color':'c9cacc'},
               xaxis: {
                 showgrid: false,
                 showspikes: true
@@ -97,6 +98,7 @@ function keys_percentage_graph() {
         title: "Solve Percentages",
         paper_bgcolor: "rgba(0,0,0,0)",
         plot_bgcolor: "rgba(0,0,0,0)",
+        font : {'color':'c9cacc'},
         legend: {
           orientation: "h"
         }
@@ -154,6 +156,7 @@ function category_breakdown_graph() {
       title: "Category Breakdown",
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
+      font : {'color':'c9cacc'},
       legend: {
         orientation: "v"
       }

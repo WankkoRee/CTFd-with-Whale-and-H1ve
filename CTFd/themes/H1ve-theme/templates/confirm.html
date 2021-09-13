@@ -4,61 +4,62 @@
 {% endblock %}
 
 {% block content %}
-<div class="section section-standard" id="notifications">
-    <div class="section-inner">
-        <div class="section-header" data-100p-top="transform[swing]:translateY(-25px);opacity[swing]:0" data-75p-top="transform[swing]:translateY(0);opacity[swing]:1">
-            <h3>Confirm</h3>
-            <div class="divider">//</div>
-        </div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 offset-md-3">
-					{% for info in infos %}
-						<div class="alert alert-info alert-dismissable" role="alert">
-							<span class="sr-only"></span>
-							{{ info }}
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-									aria-hidden="true">×</span></button>
-						</div>
-					{% endfor %}
-					{% for error in errors %}
-						<div class="alert alert-danger alert-dismissable" role="alert">
-							<span class="sr-only">Error:</span>
-							{{ error }}
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-									aria-hidden="true">×</span></button>
-						</div>
-					{% endfor %}
-					{% if user %}
-					<h3 class="text-center">
-						We've sent a confirmation email to {{ user.email }}
-					</h3>
-
-					<br>
-
-					<h4 class="text-center">
-						Please click the link in that email to confirm your account.
-					</h4>
-					{% endif %}
-
-					<hr>
-
-					{% if name %}
-					<form method="POST" action="{{ url_for('auth.confirm') }}">
-						<h4 class="text-center">
-							Need to resend the confirmation email?
-						</h4>
-						<div class="col-md-12 text-center">
-							<button type="submit" id="submit" tabindex="5" class="btn btn-md btn-primary btn-outlined">Resend</button>
-						</div>
-						<input type="hidden" name="nonce" value="{{ nonce }}">
-					</form>
-					{% endif %}
+	<div class="section-header" data-100p-top="transform[swing]:translateY(-25px);opacity[swing]:0" data-75p-top="transform[swing]:translateY(0);opacity[swing]:1">
+		<h3>邮箱验证</h3>
+		<div class="divider">//</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 offset-md-3">
+			{% for info in infos %}
+				<div class="alert alert-info alert-dismissable" role="alert">
+					<span class="sr-only"></span>
+					{{ info }}
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+							aria-hidden="true">×</span></button>
 				</div>
-			</div>
+			{% endfor %}
+			{% for error in errors %}
+				<div class="alert alert-danger alert-dismissable" role="alert">
+					<span class="sr-only">Error:</span>
+					{{ error }}
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+							aria-hidden="true">×</span></button>
+				</div>
+			{% endfor %}
+			{% if user %}
+			<h3 class="text-center">
+				我们向你的邮箱 {{ user.email }} 中发送了一封用于证明你的邮箱所有权的邮件。
+			</h3>
+
+			<br>
+
+			<h4 class="text-center">
+				请注意查收并点击其中的链接以验证。
+			</h4>
+
+			<br>
+
+			<h5 class="text-center">
+				如果你没有收到这封邮件，请 ①检查你邮箱的垃圾箱 或 ②联系管理员 。
+			</h5>
+
+			{% endif %}
+
+			<hr>
+
+			{% if name %}
+			<form method="POST" action="{{ url_for('auth.confirm') }}">
+				<h4 class="text-center">
+					需要重新发送一封邮件？
+				</h4>
+				<div class="col-md-12 text-center">
+					<button type="submit" tabindex="0" class="btn btn-md btn-primary btn-outlined">再来一个</button>
+				</div>
+				<input type="hidden" name="nonce" value="{{ nonce }}">
+			</form>
+			{% endif %}
 		</div>
 	</div>
-</div>
 {% endblock %}
 
 {% block scripts %}

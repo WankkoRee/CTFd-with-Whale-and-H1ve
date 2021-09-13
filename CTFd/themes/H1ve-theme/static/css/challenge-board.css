@@ -29,8 +29,7 @@
 }
 
 .solved-challenge {
-  background-color: #218DA6 !important;
-  opacity: 0.4;
+  background-color: #afefb2 !important;
   border: none;
 }
 
@@ -46,10 +45,10 @@
 }
 
 .btn-dark {
-  background-color: #c9cacc;
-  color: #9d9d9d;
+  background-color: #fff;
+  color: #111;
 }
 .btn-dark:hover {
-  color: #2bbc8a;
-  background-color: #c9cacc;
+  color: #000;
+  background-color: #eee;
 }

@@ -2552,6 +2552,7 @@ output {
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .form-control:focus {
+  color: #fff;
   border-color: #2bbc8a;
   outline: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 204, 0, 0.6);
@@ -7494,7 +7495,6 @@ body {
 }
 .section-inner .container {
   position: relative;
-  z-index: 6;
 }
 .section-standard {
   position: relative;
