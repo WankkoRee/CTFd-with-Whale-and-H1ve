@@ -70,18 +70,13 @@ services:
   frps:
     image: glzjin/frp:latest
     restart: always
-    ports:
-      - "1638:1638"
-      - "6490:6490"
     volumes:
       - ./frp:/conf/
     entrypoint:
         - /usr/local/bin/frps
         - -c
         - /conf/frps.ini
-    networks:
-        frp:
-            ipv4_address: 172.1.0.4
+    network_mode: host
 
 networks:
     default:
