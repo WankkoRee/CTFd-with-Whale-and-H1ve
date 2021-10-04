@@ -35,7 +35,7 @@
    其中有对应关系的参数如下：
 
    1. `frp/frpc.ini`中的`token`应和`frp/frps.ini`中的`token`一致。
-   2. `frp/frpc.ini`中的`server_addr`因为docker网络中宿主机的ip，通常为`172.1.0.1`。
+   2. `frp/frpc.ini`中的`server_addr`应和docker网络中宿主机的ip，通常为`172.1.0.1`。
    3. `frp/frpc.ini`中的`server_port`应和`frp/frps.ini`中的`bind_port`一致。
    4. `frp/frpc.ini`中的`admin_addr`应和`docker-compose.yml`中的`services.frpc.networks.frp.ipv4_address`以及`CTF-Whale`后台设置中的`Frp API IP`一致。
    5. `frp/frpc.ini`中的`admin_port`应和`CTF-Whale`后台设置中的`Frp API Port`一致。
