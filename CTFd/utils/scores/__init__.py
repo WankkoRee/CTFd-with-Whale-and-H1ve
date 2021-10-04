@@ -96,6 +96,9 @@ def get_standings(count=None, admin=False):
                 Model.id.label("account_id"),
                 Model.oauth_id.label("oauth_id"),
                 Model.name.label("name"),
+                Model.website.label("website"),
+                Model.affiliation.label("affiliation"),
+                Model.country.label("country"),
                 sumscores.columns.score,
             )
             .join(sumscores, Model.id == sumscores.columns.account_id)

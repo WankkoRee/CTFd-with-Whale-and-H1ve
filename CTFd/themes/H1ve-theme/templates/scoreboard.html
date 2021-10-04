@@ -37,6 +37,9 @@
 						<tr>
 							<td scope="col" class="text-center" width="64px"><b>排名</b></td>
 							<td scope="col"><b>用户名</b></td>
+							<td scope="col"><b>网站</b></td>
+							<td scope="col"><b>个性签名</b></td>
+							<td scope="col"><b>国家/地区</b></td>
 							<td scope="col"><b>得分</b></td>
 						</tr>
 					</thead>
@@ -61,6 +64,35 @@
 									{% endif %}
 								</a>
 							</td>
+                            <td class="text-center">
+                                {% if standing.website and (standing.website.startswith('http://') or standing.website.startswith('https://')) %}
+                                    <a href="{{ standing.website }}" target="_blank">
+                                        <i class="fas fa-external-link-alt" data-toggle="tooltip" data-placement="top"
+                                           title="{{ standing.website }}"></i>
+                                    </a>
+                                {% endif %}
+                            </td>
+                            <td class="d-none d-md-table-cell d-lg-table-cell">
+                                {% if standing.affiliation %}
+                                    {% if standing.affiliation | length > 50 %}
+                                        <span data-toggle="tooltip" data-placement="top" title="{{ standing.affiliation }}">
+                                    {% if standing.affiliation %}{{ standing.affiliation | truncate(50) }}{% endif %}
+                                </span>
+                                    {% else %}
+                                        <span>
+                                    {% if standing.affiliation %}{{ standing.affiliation | truncate(50) }}{% endif %}
+                                </span>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                            <td class="d-none d-md-table-cell d-lg-table-cell">
+                                <span>
+                                    {% if standing.country %}
+                                        <i class="flag-{{ standing.country.lower() }}"></i>
+                                        {{ lookup_country_code(standing.country) }}
+                                    {% endif %}
+                                </span>
+                            </td>
 							<td>{{ standing.score }}</td>
 						</tr>
 					{% endfor %}
