@@ -25,7 +25,7 @@
 			   {% if team is defined and team.affiliation %}value="{{ team.affiliation }}"{% endif %}>
 	</div>
 	<div class="form-group">
-		<label for="affiliation">Country</label>
+		<label for="country-input">Country</label>
 		<select class="form-control custom-select" id="country-input" name="country">
 			<option></option>
 			{% set countries = get_countries() %}

@@ -34,12 +34,12 @@
 								   {% if team is defined and team.website %}value="{{ team.website }}"{% endif %} />
 						</div>
 						<div class="form-group">
-							<label for="affiliation">联系方式</label>
+							<label for="affiliation">个性签名</label>
 							<input type="text" class="form-control" name="affiliation" id="affiliation"
 								   {% if team is defined and team.affiliation %}value="{{ team.affiliation }}"{% endif %} />
 						</div>
 						<div class="form-group">
-							<label for="affiliation">国家/地区</label>
+							<label for="country-input">国家/地区</label>
 							<select class="form-control custom-select" id="country-input" name="country">
 								<option></option>
 								{% set countries = get_countries() %}
