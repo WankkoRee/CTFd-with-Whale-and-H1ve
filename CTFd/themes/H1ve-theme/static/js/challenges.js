@@ -119,6 +119,73 @@ function updateChalWindow(obj) {
           $("#too-fast").slideUp();
         });
 
+        const displayHint = data => {
+          ezal({
+            title: "Hint",
+            body: window.challenge.render(data.content),
+            button: "Got it!"
+          });
+        };
+
+        const displayUnlock = id => {
+          ezq({
+            title: "Unlock Hint?",
+            body: "Are you sure you want to open this hint?",
+            success: () => {
+              const params = {
+                target: id,
+                type: "hints"
+              };
+              CTFd.fetch(script_root + "/api/v1/unlocks", {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  target: id,
+                  type: "hints"
+                })
+              }).then(function (response) {
+                if (response.status === 429) {
+                    // User was ratelimited but process response
+                    return response.json();
+                }
+                if (response.status === 403) {
+                    // User is not logged in or CTF is paused.
+                    return response.json();
+                }
+                return response.json();
+              }).then(function (response) {
+                if (response.success) {
+                  loadHint(id);
+                  return;
+                }
+                ezal({
+                  title: "Error",
+                  body: window.challenge.render(response.errors.score),
+                  button: "Got it!"
+                });
+              });
+            }
+          });
+        };
+
+        const loadHint = id => {
+          $.get(script_root + "/api/v1/hints/" + id, function(response) {
+            if (response.data.content) {
+              displayHint(response.data);
+              return;
+            }
+            displayUnlock(id);
+          });
+        };
+
+        $(".load-hint").on("click", function(event) {
+          loadHint($(this).data("hint-id"));
+        });
+
         $("#submit-key").click(function(e) {
           e.preventDefault();
           $("#submit-key").addClass("disabled-button");
