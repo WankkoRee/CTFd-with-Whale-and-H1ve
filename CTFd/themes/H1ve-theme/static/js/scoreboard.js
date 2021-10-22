@@ -6,13 +6,30 @@ function updatescores() {
     for (var i = 0; i < teams.length; i++) {
       var row =
         "<tr>\n" +
-        '<th scope="row" class="text-center">{0}</th>'.format(teams[i].pos) +
-        '<td><a href="{0}/team/{1}">{2}</a></td>'.format(
+        '<th scope="row" class="text-center">{0}</th>'.format(teams[i].pos) +  // 排名
+        '<td><a href="{0}/team/{1}">{2}</a></td>'.format(  // 用户名
           script_root,
           teams[i].id,
           htmlentities(teams[i].name)
         ) +
-        "<td>{0}</td>".format(teams[i].score) +
+        '<td class="text-center">' +
+          (
+              (teams[i].website && (teams[i].website.startsWith("http://") || teams[i].website.startsWith("https://")))
+                  ?
+                  '<a href="{0}" target="_blank">\n<i class="fas fa-external-link-alt" data-toggle="tooltip" data-placement="top" title="" data-original-title="{0}"></i>\n</a>'.format(teams[i].website)
+                  :
+                  ""
+          ) +
+        "</td>" +  // 网站
+        '<td class="d-none d-md-table-cell d-lg-table-cell"><span>{0}</span></td>'.format(htmlentities(teams[i].affiliation)) +  // 个性签名
+        '<td class="d-none d-md-table-cell d-lg-table-cell"><span>{0}</span></td>'.format(
+            (teams[i].country)
+                ?
+                '<i class="flag-{0}"></i>{0}'.format(teams[i].country)  // 理论上应该调用python中的lookup_country_code函数进行全称补全，不过问题不大 没强迫症就行
+                :
+                ''
+        ) +  // 国家地区
+        '<td>{0}</td>'.format(teams[i].score) +  // 得分
         "</tr>";
       table.append(row);
     }

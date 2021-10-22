@@ -43,6 +43,9 @@ class ScoreboardList(Resource):
                 "oauth_id": x.oauth_id,
                 "name": x.name,
                 "score": int(x.score),
+                "website": x.website,
+                "affiliation": x.affiliation,
+                "country": x.country,
             }
 
             if mode == TEAMS_MODE:
