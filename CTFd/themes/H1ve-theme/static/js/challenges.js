@@ -317,6 +317,11 @@ function renderSubmissionResponse(response, cb) {
     answer_input.val("");
     answer_input.removeClass("wrong");
     answer_input.addClass("correct");
+    var socket=io();
+    console.log('有人提交Flag啦');
+    var mes="有人提交Flag啦";
+    socket.emit('rank_socket',mes);
+
   } else if (result.status === "already_solved") {
     // Challenge already solved
     result_notification.addClass(

@@ -1,0 +1,44 @@
+.rank_box .el-table, .rank_box .el-table td, th {
+    color: #fff;
+}
+.rank_box .el-table, .rank_box .el-table__expanded-cell, .rank_box .el-table th, .rank_box .el-table thead.is-group th, .rank_box .el-table tr {
+    background: none;
+}
+.rank_box .el-table--border, .rank_box .el-table--group {
+    border: none;
+}
+.rank_box .el-table--border:after, .rank_box .el-table--group:after, .rank_box .el-table:before {
+    background: none;
+}
+.el-table__body, .el-table__footer, .el-table__header {
+    table-layout: fixed;
+    border-collapse: separate;
+}
+.rank_box .el-table th {
+    padding: 0;
+    overflow: visible;
+}
+.rank_box .el-table--border th, .rank_box .el-table__expanded-cell, .rank_box .el-table__fixed-right-patch, .rank_box .el-table th {
+    border: none;
+}
+.rank_box .el-table--border td, .rank_box .el-table--border th, .rank_box .el-table__body-wrapper .el-table--border.is-scrolling-left~.el-table__fixed {
+    border-right: 1px solid #053a66;
+}
+.rank_box .el-table td, .rank_box .el-table th {
+    padding: 3px 0;
+}
+.rank_box .el-table--border td:first-child .cell, .rank_box .el-table--border th:first-child .cell, .rank_box .el-table .cell, .rank_box .el-table th div {
+    padding: 0;
+    text-align: center;
+}
+.rank_box .el-table td, .rank_box .el-table thead .cell {
+    background: #0d1927;
+}
+.el-table th>.cell {
+    position: relative;
+    word-wrap: normal;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    width: 100%;
+}
