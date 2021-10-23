@@ -47,6 +47,8 @@ class ScoreboardList(Resource):
         solves = (Solves.query.filter().all())
         tmp_blood = {}
         for i in solves:
+            if i.account_id not in r_users:
+                continue
             if i.challenge_id not in tmp_blood.keys():
                 tmp_blood[i.challenge_id] = 0
             tmp_blood[i.challenge_id] += 1
