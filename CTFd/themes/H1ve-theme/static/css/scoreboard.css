@@ -136,15 +136,14 @@
     border-left: 1px solid #053a66;
     border-top: 1px solid #053a66;
     border-right: 1px solid #053a66;
-    border-bottom: 1px solid #053a66
+    border-bottom: 1px solid #053a66;
+    background: #0d1927;
 }
 
 .rank_data #userList td .cell {
     text-align: center;
-    background: #0d1927;
     border: none;
     font-size: 14px;
-    height:35px;
     line-height: 35px;
 }
 
