@@ -18,60 +18,62 @@
                 <!-- 表头 -->
                 <table class="rank_head" style="width: {{ 90 * data + 300 }}px;">
                     <colgroup>
-                        <col width="50">
-                        <col width="40">
-                        <col width="110">
-                        <col width="50">
-                        <col width="50">
+                        <col width="50" name="rank">
+                        <col width="40" name="face">
+                        <col width="110" name="name">
+                        <col width="50" name="score">
+                        <col width="50" name="solved">
                         {% for x in range(0,data) %}
                         <col width="90">
                         {% endfor %}
-                        <col name="gutter" width="0" />
                     </colgroup>
-                    <thead class="">
+                    <thead>
                     <tr id="typeMsg">
-
                     </tr>
                     <tr id="chaListMsg">
-
                     </tr>
-
                     <tr id="valueMsg">
                         <th colspan="1" rowspan="1">
                             <div class="cell">
                                 Rank
-                            </div></th>
+                            </div>
+                        </th>
                         <th colspan="1" rowspan="1">
                             <div class="cell">
                                 Face
-                            </div></th>
+                            </div>
+                        </th>
                         <th colspan="1" rowspan="1">
                             <div class="cell">
                                 Name
-                            </div></th>
+                            </div>
+                        </th>
                         <th colspan="1" rowspan="1">
                             <div class="cell">
                                 Score
-                            </div></th>
+                            </div>
+                        </th>
                         <th colspan="1" rowspan="1">
                             <div class="cell">
                                 Solved
-                            </div></th>
+                            </div>
+                        </th>
                         <th colspan="1" rowspan="1">
                             <div class="cell score">
                                 150
-                            </div></th>
+                            </div>
+                        </th>
                     </tr>
                     </thead>
                 </table>
                 <!-- 数据 -->
                 <table class="rank_data" style="width: {{ 90 * data + 300 }}px;">
                     <colgroup>
-                        <col width="50">
-                        <col width="40">
-                        <col width="110">
-                        <col width="50">
-                        <col width="50">
+                        <col width="50" name="rank">
+                        <col width="40" name="face">
+                        <col width="110" name="name">
+                        <col width="50" name="score">
+                        <col width="50" name="solved">
                         {% for x in range(0,data) %}
                         <col width="90">
                         {% endfor %}
@@ -104,10 +106,66 @@
                 dataType: "json",
                 contentType:"application/json",
                 success: function(data){
-                    document.getElementById('typeMsg').innerHTML = data['chalTypelListMsg'];
-                    document.getElementById('chaListMsg').innerHTML=data['chaListMsg'];
-                    document.getElementById('valueMsg').innerHTML=data['chaValueMsg'];
-                    document.getElementById('userList').innerHTML=data['userMsg']
+                    var typeMsg = $('#typeMsg');
+                    var chaListMsg = $('#chaListMsg');
+                    var valueMsg = $('#valueMsg');
+                    var userList = $('#userList');
+                    typeMsg.empty();
+                    chaListMsg.empty();
+                    valueMsg.empty();
+                    userList.empty();
+                    typeMsg.append('<th colspan="5" rowspan="1"><div class="cell"></div></th>');
+                    chaListMsg.append('<th colspan="5" rowspan="1"><div class="cell"></div></th>');
+                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Rank</div></th>');
+                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Face</div></th>');
+                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Name</div></th>');
+                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Score</div></th>');
+                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Solved</div></th>');
+                    var challengeMap = {};
+                    var challengeOrder = 0;
+                    for (var i in data['challenges']) {
+                        var classify = data['challenges'][i];
+                        typeMsg.append(`<th colspan="${Object.keys(classify).length}" rowspan="1"><div class="cell"><span>${i}</span></div></th>`);
+                        for (var j in classify) {
+                            var challenge = classify[j];
+                            challengeOrder++;
+                            challengeMap[challengeOrder] = j;
+                            chaListMsg.append(`<th colspan="1" rowspan="1"><div class="cell"><span>${challenge['name']}</span></div></th>`);
+                            valueMsg.append(`<th colspan="1" rowspan="1"><div class="cell score">${challenge['score']}</div></th>`);
+                        }
+                    }
+                    console.log(challengeMap);
+                    usersMap = {};
+                    for (var i in data['users']) {
+                        usersMap[data['users'][i]['rank']] = i;
+                    }
+                    for (var i in usersMap) {
+                        var user = data['users'][usersMap[i]];
+                        var userEle = $('<tr></tr>');
+                        userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${user['rank']}</div></td>`);
+                        userEle.append(`<td rowspan="1" colspan="1"><div class="cell rank_headicon"><img src="https://q2.qlogo.cn/headimg_dl?dst_uin=${user['qq']}&spec=2" alt="${user['name']}的QQ头像"/></div></td>`);
+                        if (user['name'])
+                            userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${user['name']}</div></td>`);
+                        else
+                            userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${user['user']}</div></td>`);
+                        userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${user['score']}</div></td>`);
+                        userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${Object.keys(user['solved']).length}</div></td>`);
+
+                        for(var j=1; j <= challengeOrder; j++) {
+                            if (Object.keys(user['solved']).includes(challengeMap[j])) {
+                                if (user['solved'][challengeMap[j]]['order'] === 1)
+                                    userEle.append(`<td rowspan="1" colspan="1"><div class="cell rank_logo"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAhCAMAAAAf6yCsAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABblBMVEX/xgD/////xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgD/xgDlsQC7jwCTbwC0iQDRoQCkfQDKmwDyvAAAAABHZ3G3AAAAcHRSTlMAAGLYwj+DnqLWvVt5KCnXZPTLOp9hCsMG+qsd/tKgUC/iLt9LG8+qC5xgM+61FRFJE28mNa3l8EF2uKdqVhY3LE1cU0cysRRSda7T8WYlGTmVwc38D1Q4hf0DlniPGtXmiYeAfHDcbXFMMOdpvPLpT4MXZgAAAAFiS0dEeaHc1NAAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfhCAoMAhkRRvoEAAABWUlEQVQoz23TZ1vCMBAA4FSBqohStzhwg+LGDRZFRNwDJyqKuHGc1vXzbdNrmkLvS+/ufZpe05QQLsrKHU7BDNZ3iRWVoEaVKLqLrBq48Fishieo5c0r0d7Hp/JFk7p6Zg208f2jKGgAjWhNeqkonDWjtbTq9vtnmg+trd0YwrQOtE4oNfBT6wI766bWY2u9+pqinfXp1m8zy4D1HSwWQAvarOkw9myw1IbYXoeGrTYyyvZ6bDzIxqHfV5hgNgnhKd6EaYnZDMySOff8gtaPRBflGMAS2rK2RfGVhLyajITWUql1td5A28SltrZ3ZIJTwS61EPek+J6R7VM74IykjezwSLAeseMTMz9VzWeWZ3iqaEgZEuZuOycJrrogl1yVJeTKrK6JJ3eTv72714qkOpifth8e867cE575rNZ51rKCmkSt/4oXIE2TF4DX4n8s8Oak18x7IYj2D13n8ccXTM/LAAAAAElFTkSuQmCC" alt=""></div></td>`);
+                                else if (user['solved'][challengeMap[j]]['order'] === 2)
+                                    userEle.append(`<td rowspan="1" colspan="1"><div class="cell rank_logo"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZCAMAAAAGyf7hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABUFBMVEXP3+b////P3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+bP3+aksbd5gohpcHaQmqHJ2eC9zNOXoqhxeX+ruL6BipCeqbCxv8WJkpkAAACC4qKDAAAAYXRSTlMAAA0bcN27PhAJ8vz07VWCGRae61uvOLxE3Gx37MA5MPuyw0fLSWXRHSHWe5D1jEZogCxpdsamXyX4ILOOS0Iki6D+q98T201M0P3uA7dKfTqhSEFD5wvNVD1Fkm+EGOLICpxWQgAAAAFiS0dEb1UIYYEAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfhCAoMAhkRRvoEAAABI0lEQVQoz03R11oCMRAF4CzgWhAbFqyABUXsDVRWsGNX7N0DWYqi73/ppKFzk5N/k9nkC2OyPF5fg93Y1MyYRaXMbvGDqjXQ9oftMOXv0NjZRbNCkXO3BAS7FfaQlbkoVyzuldgnsAJUeFVgSGK/7vepcEDgoLbSF6+JcchLOKzsu8h/VBohDEdEKnC1DojKnqPy79WybjMmcZxSTR6J00ExITFGya3j5JS6Zny6fk0k9DVDM/FZY3PzCwqjWFxaXlkF1nzJ1DokbtCCzXTCiW1lsukgkBS4rTbu7HpsGfYI9027g0MdchbLGnT0FhxZ7FjHk9Mz8/mcmXTBLk28Yrn89c0tELlj7J7g4fHJScmHCwPPNOSBl39P/Bp4E8P7h3r3X20PeVwQpGqRAAAAAElFTkSuQmCC" alt=""></div></td>`);
+                                else if (user['solved'][challengeMap[j]]['order'] === 3)
+                                    userEle.append(`<td rowspan="1" colspan="1"><div class="cell rank_logo"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAZCAMAAAAGyf7hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABTVBMVEX+oX3////+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3+oX3MfmCGTjiQVT7EeVyzblP3nHm8c1eraE7biWnpk3GZW0PwmHUAAABLn8MWAAAAYXRSTlMAAA0bcN27PhAJ8vz07VWCGRae61uvOLxE3Gx37MA5MPuyw0fLSWXRHSHWe5D1jEZogCxpdsamXyX4ILOOS0Iki6D+q98T201M0P3uA7dKfTqhSEFD5wvNVD1Fkm+EGOLICpxWQgAAAAFiS0dEbiIPURcAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfhCAoMAhkRRvoEAAABI0lEQVQoz02R11YCQQxAZwHXgtiwYAUsCGJvoLKKHbuCvWdnQbD8/6tJZgbNS+7eTXImJ0Jw+PyBBruxqVkIC0M5uyUIGK2htj/ZDiaCHVp2duGXK6V0MYe7leyhEg+lLBP1suwjrHxAVVaIIiz79byaqhwgOcjmE7urTEN+lMN16X0xjqCMxnR7WX5TivPMUSp06VUeyTGW47pbD51gmUD6qeFIejxMJtWaqan6mpDWa0amUzPGzc7NKxmHhcWl5RWA1UAmuwYs17FgI5d2Eptb+VwYIENyWzXu7Ppshj2U+2bcwaGGgiXyRjq6BY4scazx5PTM/D4Xhi7EpcErUSiWrm8AYrdC3KG4f3h0sny4KMATpiLA878Tv4ReKb29q7v/AhnveSS6NVNpAAAAAElFTkSuQmCC" alt=""></div></td>`);
+                                else
+                                    userEle.append(`<td rowspan="1" colspan="1"><div class="cell rank_logo"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAYCAMAAAAiV0Z6AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAq1BMVEXGrGL////GrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGLGrGIAAADiRbx9AAAAN3RSTlMAAGdqKVx9gkcM/UPA734R3sjch15VWHSp3cX+xvj6wgPtk1k+O0xyt851P/e2SeAfPD01EpiXEAgYbAAAAAFiS0dEOKAHpdYAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfhBQUKARTgpH0vAAAAhElEQVQoz2NgYmZgYGBhZWNn5uAEshgYQYDBnIuBm8ccDHj5oKL8DAKCDOZwICQsIiomLsHLICnFIG2ODhgkZRhk0QXlhpgo0BfyCuaKSsoqqmrqGkiimpxa4MACAm0ZkJCOrh6DpD4DEjAwNDI2AYakpCQDCoCEL31FgU7GImpqhkUUAFFcNRWazLlNAAAAAElFTkSuQmCC" alt=""></div></td>`);
+                            } else
+                                userEle.append(`<td rowspan="1" colspan="1"><div class="cell"></div></td>`);
+                        }
+                        userList.append(userEle);
+                    }
                 }
             });
         }
