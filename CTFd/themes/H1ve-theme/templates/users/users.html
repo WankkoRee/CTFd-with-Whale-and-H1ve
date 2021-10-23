@@ -15,9 +15,9 @@
 				<thead>
 				<tr>
 					<td><b>用户名</b></td>
-					<td class="text-center"><b>网站</b></td>
-					<td class="d-none d-md-table-cell d-lg-table-cell"><b>个性签名</b></td>
-					<td class="d-none d-md-table-cell d-lg-table-cell"><b>国家/地区</b></td>
+					<td class="d-none d-md-table-cell d-lg-table-cell"><b>学号</b></td>
+					<td class="d-none d-md-table-cell d-lg-table-cell"><b>姓名</b></td>
+					<td class="d-none d-md-table-cell d-lg-table-cell"><b>QQ</b></td>
 				</tr>
 				</thead>
 				<tbody>
@@ -38,11 +38,8 @@
 							{% endif %}
 						</td>
 						<td class="text-center">
-							{% if user.website and (user.website.startswith('http://') or user.website.startswith('https://')) %}
-								<a href="{{ user.website }}" target="_blank">
-									<i class="fas fa-external-link-alt" data-toggle="tooltip" data-placement="top"
-									   title="{{ user.website }}"></i>
-								</a>
+							{% if user.website %}
+								{{ user.website }}
 							{% endif %}
 						</td>
 						<td class="d-none d-md-table-cell d-lg-table-cell">
@@ -61,8 +58,7 @@
 						<td class="d-none d-md-table-cell d-lg-table-cell">
 							<span>
 								{% if user.country %}
-									<i class="flag-{{ user.country.lower() }}"></i>
-									{{ lookup_country_code(user.country) }}
+									<a href="tencent://message/?uin={{ user.country }}" target="_blank">{{ user.country }}</a>
 								{% endif %}
 							</span>
 						</td>

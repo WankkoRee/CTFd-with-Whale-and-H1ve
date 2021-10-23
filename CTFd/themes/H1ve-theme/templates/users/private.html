@@ -20,20 +20,19 @@
 		</h3>
 	{% endif %}
 
-	{% if user.website and (user.website.startswith('http://') or user.website.startswith('https://')) %}
+	{% if user.website %}
 		<h3>
-			<a href="{{ user.website }}" target="_blank" style="color: inherit;">
-				<span class="badge badge-primary">{{ user.website }}</span>
-			</a>
+			<span class="badge badge-primary">
+				{{ user.website }}
+			</span>
 		</h3>
 	{% endif %}
 
 	{% if user.country %}
 		<h3>
-			<span class="badge badge-primary">
-				<i class="flag-{{ user.country.lower() }}"></i>
-				{{ lookup_country_code(user.country) }}
-			</span>
+			<a href="tencent://message/?uin={{ user.country }}" target="_blank" style="color: inherit;">
+				<span class="badge badge-primary">{{ user.country }}</span>
+			</a>
 		</h3>
 	{% endif %}
 
