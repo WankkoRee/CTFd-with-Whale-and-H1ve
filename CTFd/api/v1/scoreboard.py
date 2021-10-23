@@ -24,7 +24,7 @@ class ScoreboardList(Resource):
         for x, i in enumerate(uu, 1):
             r_users[i.account_id] = {
                 'user': i.name,
-                'score': i.score,
+                'score': float(i.score),
                 'name': i.affiliation,
                 'idc': i.website,
                 'qq': i.country,
