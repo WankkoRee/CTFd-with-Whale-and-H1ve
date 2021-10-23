@@ -27,7 +27,7 @@ def clear_config():
 
 def clear_standings():
     from CTFd.utils.scores import get_standings, get_team_standings, get_user_standings
-    from CTFd.api.v1.scoreboard import ScoreboardDetail, ScoreboardList
+    from CTFd.api.v1.scoreboard import ScoreboardList
     from CTFd.api import api
 
     cache.delete_memoized(get_standings)
@@ -35,7 +35,6 @@ def clear_standings():
     cache.delete_memoized(get_user_standings)
     cache.delete(make_cache_key(path="scoreboard.listing"))
     cache.delete(make_cache_key(path=api.name + "." + ScoreboardList.endpoint))
-    cache.delete(make_cache_key(path=api.name + "." + ScoreboardDetail.endpoint))
     cache.delete_memoized(ScoreboardList.get)
 
 
