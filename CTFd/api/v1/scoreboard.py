@@ -15,7 +15,6 @@ scoreboard_namespace = Namespace(
 
 @scoreboard_namespace.route("")
 class ScoreboardList(Resource):
-    @check_account_visibility
     @check_score_visibility
     def get(self):
         # 获得排名
