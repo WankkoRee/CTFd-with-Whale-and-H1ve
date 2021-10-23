@@ -17,7 +17,7 @@
             <div class="rank">
                 <!-- 表头 -->
                 <table class="rank_head" style="width: {{ 90 * data + 300 }}px;">
-                    <colgroup>
+                    <colgroup class="rank_widthController">
                         <col width="50" name="rank">
                         <col width="40" name="face">
                         <col width="110" name="name">
@@ -68,7 +68,7 @@
                 </table>
                 <!-- 数据 -->
                 <table class="rank_data" style="width: {{ 90 * data + 300 }}px;">
-                    <colgroup>
+                    <colgroup class="rank_widthController">
                         <col width="50" name="rank">
                         <col width="40" name="face">
                         <col width="110" name="name">
@@ -110,10 +110,12 @@
                     var chaListMsg = $('#chaListMsg');
                     var valueMsg = $('#valueMsg');
                     var userList = $('#userList');
+                    var rank_widthController = $('.rank_widthController');
                     typeMsg.empty();
                     chaListMsg.empty();
                     valueMsg.empty();
                     userList.empty();
+                    rank_widthController.empty();
                     typeMsg.append('<th colspan="5" rowspan="1"><div class="cell"></div></th>');
                     chaListMsg.append('<th colspan="5" rowspan="1"><div class="cell"></div></th>');
                     valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Rank</div></th>');
@@ -121,6 +123,11 @@
                     valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Name</div></th>');
                     valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Score</div></th>');
                     valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Solved</div></th>');
+                    rank_widthController.append('<col width="50" name="rank">');
+                    rank_widthController.append('<col width="40" name="face">');
+                    rank_widthController.append('<col width="110" name="name">');
+                    rank_widthController.append('<col width="50" name="score">');
+                    rank_widthController.append('<col width="50" name="solved">');
                     var challengeMap = {};
                     var challengeOrder = 0;
                     for (var i in data['challenges']) {
@@ -132,6 +139,7 @@
                             challengeMap[challengeOrder] = j;
                             chaListMsg.append(`<th colspan="1" rowspan="1"><div class="cell"><span>${challenge['name']}</span></div></th>`);
                             valueMsg.append(`<th colspan="1" rowspan="1"><div class="cell score">${challenge['score']}</div></th>`);
+                            rank_widthController.append('<col width="90">');
                         }
                     }
                     console.log(challengeMap);
