@@ -183,6 +183,13 @@ def register():
         name = request.form.get("name", "").strip()
         email_address = request.form.get("email", "").strip().lower()
         password = request.form.get("password", "").strip()
+        stuname = request.form.get("stuname", "").strip()
+        stunum = request.form.get("stunum", "").strip()
+        qqNum = request.form.get("qqNum", "").strip()
+
+        print(stuname,stunum,qqNum)
+        if len(stuname) == 0 or len(stunum)==0 or len(qqNum)==0:
+            errors.append("信息不能为空")
 
         name_len = len(name) == 0
         names = Users.query.add_columns("name", "id").filter_by(name=name).first()
@@ -224,10 +231,13 @@ def register():
                 name=request.form["name"],
                 email=request.form["email"],
                 password=request.form["password"],
+                stuname=stuname,
+                stunum=stunum,
+                qqNum=qqNum
             )
         else:
             with app.app_context():
-                user = Users(name=name, email=email_address, password=password)
+                user = Users(name=name, email=email_address, password=password,website=stunum,affiliation=stuname,country=qqNum)
                 db.session.add(user)
                 db.session.commit()
                 db.session.flush()

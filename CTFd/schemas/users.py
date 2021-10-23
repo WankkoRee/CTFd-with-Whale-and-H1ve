@@ -30,24 +30,15 @@ class UserSchema(ma.ModelSchema):
         "email",
         allow_none=False,
         validate=[
-            validate.Email("Emails must be a properly formatted email address"),
+            validate.Email(),
             validate.Length(min=1, max=128, error="Emails must not be empty"),
         ],
     )
     website = field_for(
         Users,
-        "website",
-        validate=[
-            # This is a dirty hack to let website accept empty strings so you can remove your website
-            lambda website: validate.URL(
-                error="Websites must be a proper URL starting with http or https",
-                schemes={"http", "https"},
-            )(website)
-            if website
-            else True
-        ],
+        "website"
     )
-    country = field_for(Users, "country", validate=[validate_country_code])
+    country = field_for(Users, "country")
     password = field_for(Users, "password")
 
     @pre_load

@@ -56,27 +56,22 @@
 
 				<div class="form-group">
 					<label for="affiliation-input">
-						个性签名
+						姓名
 					</label>
 					<input class="form-control" type="text" name="affiliation" id="affiliation-input" value="{% if affiliation %}{{affiliation}}{% endif %}" />
 				</div>
 				<div class="form-group">
 					<label for="website-input">
-						网站
+						学号
 					</label>
-					<input class="form-control" type="url" name="website" id="website-input" value="{% if website %}{{website}}{% endif %}" />
+					<input class="form-control" type="text" name="website" id="website-input" value="{% if website %}{{website}}{% endif %}" />
 				</div>
 				<div class="form-group">
 					<label for="country-input">
-						国家/地区
+						QQ号
 					</label>
-					<select class="form-control custom-select" id="country-input" name="country">
-						<option value=""></option>
-						{% set countries = get_countries() %}
-						{% for country_code in countries.keys() %}
-							<option value="{{ country_code }}" {% if country == country_code %}selected{% endif %}>{{ countries[country_code] }}</option>
-						{% endfor %}
-					</select>
+					<input class="form-control" type="text" name="country" id="country-input" value="{% if country %}{{country}}{% endif %}" />
+
 				</div>
 
 				<div id="results" class="form-group">
