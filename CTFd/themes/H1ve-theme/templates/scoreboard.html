@@ -16,16 +16,13 @@
             <!-- 排名框 -->
             <div class="rank">
                 <!-- 表头 -->
-                <table class="rank_head" style="width: {{ 90 * data + 300 }}px;">
+                <table class="rank_head">
                     <colgroup class="rank_widthController">
                         <col width="50" name="rank">
                         <col width="40" name="face">
                         <col width="110" name="name">
                         <col width="50" name="score">
                         <col width="50" name="solved">
-                        {% for x in range(0,data) %}
-                        <col width="90">
-                        {% endfor %}
                     </colgroup>
                     <thead>
                     <tr id="typeMsg">
@@ -33,53 +30,24 @@
                     <tr id="chaListMsg">
                     </tr>
                     <tr id="valueMsg">
-                        <th colspan="1" rowspan="1">
-                            <div class="cell">
-                                Rank
-                            </div>
-                        </th>
-                        <th colspan="1" rowspan="1">
-                            <div class="cell">
-                                Face
-                            </div>
-                        </th>
-                        <th colspan="1" rowspan="1">
-                            <div class="cell">
-                                Name
-                            </div>
-                        </th>
-                        <th colspan="1" rowspan="1">
-                            <div class="cell">
-                                Score
-                            </div>
-                        </th>
-                        <th colspan="1" rowspan="1">
-                            <div class="cell">
-                                Solved
-                            </div>
-                        </th>
-                        <th colspan="1" rowspan="1">
-                            <div class="cell score">
-                                150
-                            </div>
-                        </th>
+                        <th colspan="1" rowspan="1"><div class="cell">Rank</div></th>
+                        <th colspan="1" rowspan="1"><div class="cell">Face</div></th>
+                        <th colspan="1" rowspan="1"><div class="cell">Name</div></th>
+                        <th colspan="1" rowspan="1"><div class="cell">Score</div></th>
+                        <th colspan="1" rowspan="1"><div class="cell">Solved</div></th>
                     </tr>
                     </thead>
                 </table>
                 <!-- 数据 -->
-                <table class="rank_data" style="width: {{ 90 * data + 300 }}px;">
+                <table class="rank_data">
                     <colgroup class="rank_widthController">
                         <col width="50" name="rank">
                         <col width="40" name="face">
                         <col width="110" name="name">
                         <col width="50" name="score">
                         <col width="50" name="solved">
-                        {% for x in range(0,data) %}
-                        <col width="90">
-                        {% endfor %}
                     </colgroup>
                     <tbody id="userList">
-
                     </tbody>
                 </table>
             </div>
@@ -142,7 +110,8 @@
                             rank_widthController.append('<col width="90">');
                         }
                     }
-                    console.log(challengeMap);
+                    $('.rank_head').width(90 * challengeOrder + 300);
+                    $('.rank_data').width(90 * challengeOrder + 300);
                     usersMap = {};
                     for (var i in data['users']) {
                         usersMap[data['users'][i]['rank']] = i;
