@@ -165,8 +165,8 @@
             "216319231": "软件21.31专升本",
         };
         $(".class").each(function(){
-            if ($(this).text.length === 11) {
-                var classsign = $(this).text.substr(0, 9);
+            if ($(this).text().length === 11) {
+                var classsign = $(this).text().substr(0, 9);
                 if (Object.keys(classsignMap).includes(classsign)) {
                     $(this).text(classsignMap[classsign]);
                 } else
