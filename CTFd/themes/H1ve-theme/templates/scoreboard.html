@@ -10,51 +10,47 @@
 		<div class="divider">//</div>
 	</div>
 
-    <div class="row">
-        <!-- 排名 -->
-        <div>
-            <!-- 排名框 -->
-            <div class="rank">
-                <!-- 表头 -->
-                <table class="rank_head">
-                    <colgroup class="rank_widthController">
-                        <col width="50" name="rank">
-                        <col width="40" name="face">
-                        <col width="110" name="name">
-                        <col width="120" name="class">
-                        <col width="50" name="score">
-                        <col width="50" name="solved">
-                    </colgroup>
-                    <thead>
-                    <tr id="typeMsg">
-                    </tr>
-                    <tr id="chaListMsg">
-                    </tr>
-                    <tr id="valueMsg">
-                        <th colspan="1" rowspan="1"><div class="cell">排名</div></th>
-                        <th colspan="1" rowspan="1"><div class="cell">头像</div></th>
-                        <th colspan="1" rowspan="1"><div class="cell">姓名</div></th>
-                        <th colspan="1" rowspan="1"><div class="cell">班级</div></th>
-                        <th colspan="1" rowspan="1"><div class="cell">得分</div></th>
-                        <th colspan="1" rowspan="1"><div class="cell">已攻克</div></th>
-                    </tr>
-                    </thead>
-                </table>
-                <!-- 数据 -->
-                <table class="rank_data">
-                    <colgroup class="rank_widthController">
-                        <col width="50" name="rank">
-                        <col width="40" name="face">
-                        <col width="110" name="name">
-                        <col width="110" name="class">
-                        <col width="50" name="score">
-                        <col width="50" name="solved">
-                    </colgroup>
-                    <tbody id="userList">
-                    </tbody>
-                </table>
-            </div>
-            <!-- 底栏 -->
+    <div class="row justify-content-md-center">
+        <!-- 排名框 -->
+        <div class="rank">
+            <!-- 表头 -->
+            <table class="rank_head">
+                <colgroup class="rank_widthController">
+                    <col width="50" name="rank">
+                    <col width="40" name="face">
+                    <col width="110" name="name">
+                    <col width="120" name="class">
+                    <col width="50" name="score">
+                    <col width="50" name="solved">
+                </colgroup>
+                <thead>
+                <tr id="typeMsg">
+                </tr>
+                <tr id="chaListMsg">
+                </tr>
+                <tr id="valueMsg">
+                    <th colspan="1" rowspan="1"><div class="cell">排名</div></th>
+                    <th colspan="1" rowspan="1"><div class="cell">头像</div></th>
+                    <th colspan="1" rowspan="1"><div class="cell">姓名</div></th>
+                    <th colspan="1" rowspan="1"><div class="cell">班级</div></th>
+                    <th colspan="1" rowspan="1"><div class="cell">得分</div></th>
+                    <th colspan="1" rowspan="1"><div class="cell">已攻克</div></th>
+                </tr>
+                </thead>
+            </table>
+            <!-- 数据 -->
+            <table class="rank_data">
+                <colgroup class="rank_widthController">
+                    <col width="50" name="rank">
+                    <col width="40" name="face">
+                    <col width="110" name="name">
+                    <col width="110" name="class">
+                    <col width="50" name="score">
+                    <col width="50" name="solved">
+                </colgroup>
+                <tbody id="userList">
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}
@@ -63,6 +59,7 @@
 	<script src="{{ url_for('views.themes', path='js/style.js') }}"></script>
 	<script src="{{ url_for('views.themes', path='js/socket.io.js') }}"></script>
     <script>
+        $(".section .container").addClass("container-fluid").removeClass("container");
         const classsignMap  = {
             "205601401": "计算机20.1本",
             "205612401": "网络20.2本",
@@ -172,11 +169,11 @@
                             challengeMap[challengeOrder] = j;
                             chaListMsg.append(`<th colspan="1" rowspan="1"><div class="cell"><span>${challenge['name']}</span></div></th>`);
                             valueMsg.append(`<th colspan="1" rowspan="1"><div class="cell score">${challenge['score']}</div></th>`);
-                            rank_widthController.append('<col width="90">');
+                            rank_widthController.append('<col width="50">');
                         }
                     }
-                    $('.rank_head').width(90 * challengeOrder + 300);
-                    $('.rank_data').width(90 * challengeOrder + 300);
+                    $('.rank_head').width(50 * challengeOrder + 300);
+                    $('.rank_data').width(50 * challengeOrder + 300);
                     usersMap = {};
                     for (var i in data['users']) {
                         usersMap[data['users'][i]['rank']] = i;
