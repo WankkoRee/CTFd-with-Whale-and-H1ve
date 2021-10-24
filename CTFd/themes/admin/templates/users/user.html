@@ -76,11 +76,16 @@
 				</h3>
 			{% endif %}
 
+			{% if user.website %}
+				<h3 class="d-inline-block">
+					<span class="badge badge-primary">{{ user.website }}</span>
+				</h3>
+			{% endif %}
+
 			{% if user.country %}
 				<h3 class="d-inline-block">
-					<span class="badge badge-primary">
-						<i class="flag-{{ user.country.lower() }}"></i>
-						{{ lookup_country_code(user.country) }}
+					<span class="badge badge-success">
+						<a href="tencent://message/?uin={{ user.country }}" target="_blank">{{ user.country }}</a>
 					</span>
 				</h3>
 			{% endif %}

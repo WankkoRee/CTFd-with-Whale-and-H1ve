@@ -15,26 +15,19 @@
 		<input type="password" class="form-control" name="password" id="password"/>
 	</div>
 	<div class="form-group">
-		<label for="website">网站</label>
+		<label for="website">学号</label>
 		<input type="text" class="form-control" name="website" id="website"
 			   {% if user is defined and user.website %}value="{{ user.website }}"{% endif %}>
 	</div>
 	<div class="form-group">
-		<label for="affiliation">个性签名</label>
+		<label for="affiliation">姓名</label>
 		<input type="text" class="form-control" name="affiliation" id="affiliation"
 			   {% if user is defined and user.affiliation %}value="{{ user.affiliation }}"{% endif %}>
 	</div>
 	<div class="form-group">
-		<label for="country-input">国家/地区</label>
-		<select class="form-control custom-select" id="country-input" name="country">
-			<option></option>
-			{% set countries = get_countries() %}
-			{% for country_code in countries.keys() %}
-				<option value="{{ country_code }}" {% if user is defined and user.country == country_code %}selected{% endif %}>
-					{{ countries[country_code] }}
-				</option>
-			{% endfor %}
-		</select>
+		<label for="country-input">QQ</label>
+        <input type="text" class="form-control" name="country" id="country-input"
+                   {% if user is defined and user.country %}value="{{ user.country }}"{% endif %}>
 	</div>
 	<div class="form-group">
 		<div class="form-check form-check-inline">

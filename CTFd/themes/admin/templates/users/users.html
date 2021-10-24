@@ -30,7 +30,7 @@
 							<option value="name" {% if field == 'name' %}selected{% endif %}>用户名</option>
 							<option value="id" {% if field == 'id' %}selected{% endif %}>ID</option>
 							<option value="email" {% if field == 'email' %}selected{% endif %}>邮箱</option>
-							<option value="affiliation" {% if field == 'affiliation' %}selected{% endif %}>个性签名</option>
+							<option value="affiliation" {% if field == 'affiliation' %}selected{% endif %}>姓名</option>
 							<option value="ip" {% if field == 'ip' %}selected{% endif %}>IP</option>
 					  </select>
 					</div>
@@ -55,9 +55,9 @@
 						</td>
 						<td class="d-md-table-cell d-lg-table-cell text-center"><b>邮箱</b>
 						</td>
-						<td class=""><b>网站</b>
+						<td class="text-center"><b>学号</b>
 						</td>
-						<td class=""><b>国家/地区</b>
+						<td class="text-center"><b>QQ</b>
 						</td>
 						<td class="text-center"><b>网站管理</b>
 						</td>
@@ -93,17 +93,13 @@
 						</td>
 						<td class="team-website text-center">
 							{% if user.website %}
-								<a href="{{ user.website }}" target="_blank">
-									<i class="btn-fa fas fa-external-link-alt" data-toggle="tooltip" data-placement="top"
-									   title="{{ user.website }}" aria-hidden="true"></i>
-								</a>
+								{{ user.website }}
 							{% endif %}
 						</td>
 						<td class="team-country text-center" value="{{ user.country if user.country is not none }}">
 							<span>
 								{% if user.country %}
-									<i class="flag-{{ user.country.lower() }}"></i>
-									{{ lookup_country_code(user.country) }}
+									<a href="tencent://message/?uin={{ user.country }}" target="_blank">{{ user.country }}</a>
 								{% endif %}
 							</span>
 						</td>
