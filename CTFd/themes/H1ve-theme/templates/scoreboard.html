@@ -21,6 +21,7 @@
                         <col width="50" name="rank">
                         <col width="40" name="face">
                         <col width="110" name="name">
+                        <col width="120" name="class">
                         <col width="50" name="score">
                         <col width="50" name="solved">
                     </colgroup>
@@ -30,11 +31,12 @@
                     <tr id="chaListMsg">
                     </tr>
                     <tr id="valueMsg">
-                        <th colspan="1" rowspan="1"><div class="cell">Rank</div></th>
-                        <th colspan="1" rowspan="1"><div class="cell">Face</div></th>
-                        <th colspan="1" rowspan="1"><div class="cell">Name</div></th>
-                        <th colspan="1" rowspan="1"><div class="cell">Score</div></th>
-                        <th colspan="1" rowspan="1"><div class="cell">Solved</div></th>
+                        <th colspan="1" rowspan="1"><div class="cell">排名</div></th>
+                        <th colspan="1" rowspan="1"><div class="cell">头像</div></th>
+                        <th colspan="1" rowspan="1"><div class="cell">姓名</div></th>
+                        <th colspan="1" rowspan="1"><div class="cell">班级</div></th>
+                        <th colspan="1" rowspan="1"><div class="cell">得分</div></th>
+                        <th colspan="1" rowspan="1"><div class="cell">已攻克</div></th>
                     </tr>
                     </thead>
                 </table>
@@ -44,6 +46,7 @@
                         <col width="50" name="rank">
                         <col width="40" name="face">
                         <col width="110" name="name">
+                        <col width="110" name="class">
                         <col width="50" name="score">
                         <col width="50" name="solved">
                     </colgroup>
@@ -60,6 +63,66 @@
 	<script src="{{ url_for('views.themes', path='js/style.js') }}"></script>
 	<script src="{{ url_for('views.themes', path='js/socket.io.js') }}"></script>
     <script>
+        const classsignMap  = {
+            "205601401": "计算机20.1本",
+            "205612401": "网络20.2本",
+            "205615401": "智能20.3本",
+            "205614401": "数据20.4本",
+            "206310401": "物联网20.5本",
+            "205606401": "软件20.6本",
+            "205606402": "软件20.7本",
+            "205606403": "软件20.8本",
+            "205606404": "软件20.9本",
+            "205606405": "软件20.10本",
+            "205606406": "软件20.11本",
+            "205613401": "软件20.12本",
+            "205613402": "软件20.13本",
+            "205613403": "软件20.14本",
+            "205613404": "软件20.15本",
+            "206316401": "软件20.16本",
+            "206316402": "软件20.17本",
+            "206316403": "软件20.18本",
+            "206317401": "软件20.19本",
+            "206317402": "软件20.20本",
+            "206317403": "软件20.21本",
+            "205616401": "计算机20.22本",
+            "206319201": "软件20.23专升本",
+            "206319202": "软件20.24专升本",
+            "206319203": "软件20.25专升本",
+            "206319204": "软件20.26专升本",
+
+            "215601401": "计科21.1本",
+            "215619402": "计算机21.2本",
+            "215619403": "计算机21.3本",
+            "215619404": "计算机21.4本",
+            "215619405": "计算机21.5本",
+            "215606406": "软件21.6本",
+            "215606407": "软件21.7本",
+            "215606408": "软件21.8本",
+            "215606409": "软件21.9本",
+            "215606410": "软件21.10本",
+            "215606411": "软件21.11本",
+            "215606412": "软件21.12本",
+            "215606413": "软件21.13本",
+            "215613414": "软件21.14本",
+            "215613415": "软件21.15本",
+            "215613416": "软件21.16本",
+            "215613417": "软件21.17本",
+            "215613418": "软件21.18本",
+            "216316419": "软件21.19本",
+            "216316420": "软件21.20本",
+            "216316421": "软件21.21本",
+            "216316422": "软件21.22本",
+            "216317423": "软件21.23本",
+            "216317424": "软件21.24本",
+            "216317425": "软件21.25本",
+            "216317426": "软件21.26本",
+            "216317427": "软件21.27本",
+            "216319228": "软件21.28专升本",
+            "216319229": "软件21.29专升本",
+            "216319230": "软件21.30专升本",
+            "216319231": "软件21.31专升本",
+        };
         start();
         var socket=io();
         socket.on('updateMsg', function (data) {
@@ -84,16 +147,18 @@
                     valueMsg.empty();
                     userList.empty();
                     rank_widthController.empty();
-                    typeMsg.append('<th colspan="5" rowspan="1"><div class="cell"></div></th>');
-                    chaListMsg.append('<th colspan="5" rowspan="1"><div class="cell"></div></th>');
-                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Rank</div></th>');
-                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Face</div></th>');
-                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Name</div></th>');
-                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Score</div></th>');
-                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">Solved</div></th>');
+                    typeMsg.append('<th colspan="6" rowspan="1"><div class="cell"></div></th>');
+                    chaListMsg.append('<th colspan="6" rowspan="1"><div class="cell"></div></th>');
+                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">排名</div></th>');
+                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">头像</div></th>');
+                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">姓名</div></th>');
+                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">班级</div></th>');
+                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">得分</div></th>');
+                    valueMsg.append('<th colspan="1" rowspan="1"><div class="cell">已攻克</div></th>');
                     rank_widthController.append('<col width="50" name="rank">');
                     rank_widthController.append('<col width="40" name="face">');
                     rank_widthController.append('<col width="110" name="name">');
+                    rank_widthController.append('<col width="120" name="class">');
                     rank_widthController.append('<col width="50" name="score">');
                     rank_widthController.append('<col width="50" name="solved">');
                     var challengeMap = {};
@@ -132,6 +197,14 @@
                             userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${user['name']}</div></td>`);
                         else
                             userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${user['user']}</div></td>`);
+                        if (user['idc'].length === 11) {
+                            var classsign = user['idc'].substr(0,9);
+                            if (Object.keys(classsignMap).includes(classsign)) {
+                                userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${classsignMap[classsign]}</div></td>`);
+                            } else
+                                userEle.append(`<td rowspan="1" colspan="1"><div class="cell"></div></td>`);
+                        } else
+                            userEle.append(`<td rowspan="1" colspan="1"><div class="cell"></div></td>`);
                         userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${user['score']}</div></td>`);
                         userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${Object.keys(user['solved']).length}</div></td>`);
 
