@@ -26,10 +26,10 @@ def during_ctf_time_only(f):
                 if view_after_ctf():
                     return f(*args, **kwargs)
                 else:
-                    error = "{} has ended".format(config.ctf_name())
+                    error = "{} 已经圆满结束啦".format(config.ctf_name())
                     abort(403, description=error)
             if ctf_started() is False:
-                error = "{} has not started yet".format(config.ctf_name())
+                error = "{} 还没开始呀".format(config.ctf_name())
                 abort(403, description=error)
 
     return during_ctf_time_only_wrapper
