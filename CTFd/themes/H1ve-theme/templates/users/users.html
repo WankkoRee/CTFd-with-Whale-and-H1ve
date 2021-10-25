@@ -64,7 +64,10 @@
 						<td class="d-none d-md-table-cell d-lg-table-cell">
 							<span>
 								{% if user.country %}
-									<a href="tencent://message/?uin={{ user.country }}" target="_blank">{{ user.country }}</a>
+									<a href="tencent://message/?uin={{ user.country }}" target="_blank">
+                                        <img src="https://q2.qlogo.cn/headimg_dl?dst_uin={{ user.country }}&spec=2" alt="{{ user.affiliation }}的QQ头像"/>
+                                        <span>{{ user.country }}</span>
+                                    </a>
 								{% endif %}
 							</span>
 						</td>
