@@ -190,10 +190,17 @@
                         else
                             userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${user['rank']}</div></td>`);
                         userEle.append(`<td rowspan="1" colspan="1"><div class="cell rank_headicon"><img src="https://q2.qlogo.cn/headimg_dl?dst_uin=${user['qq']}&spec=2" alt="${user['name']}的QQ头像"/></div></td>`);
-                        if (user['name'])
-                            userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${user['name']}</div></td>`);
-                        else
-                            userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${user['user']}</div></td>`);
+                        if (user['name']) {
+                            if (user['user'].startsWith("NYNUSEC-"))
+                                userEle.append(`<td rowspan="1" colspan="1"><div class="cell" style="line-height: 20px;">NYNUSEC<br/>${user['name']}</div></td>`);
+                            else
+                                userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${user['name']}</div></td>`);
+                        } else {
+                            if (user['user'].startsWith("NYNUSEC-"))
+                                userEle.append(`<td rowspan="1" colspan="1"><div class="cell" style="line-height: 20px;">NYNUSEC<br/>${user['user'].substr(8)}</div></td>`);
+                            else
+                                userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${user['user']}</div></td>`);
+                        }
                         if (user['idc'].length === 11) {
                             var classsign = user['idc'].substr(0,9);
                             if (Object.keys(classsignMap).includes(classsign)) {
