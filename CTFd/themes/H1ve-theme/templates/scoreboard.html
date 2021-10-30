@@ -206,9 +206,9 @@
                             if (Object.keys(classsignMap).includes(classsign)) {
                                 userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${classsignMap[classsign]}</div></td>`);
                             } else
-                                userEle.append(`<td rowspan="1" colspan="1"><div class="cell"></div></td>`);
+                                userEle.append(`<td rowspan="1" colspan="1"><div class="cell">非参赛年级</div></td>`);
                         } else
-                            userEle.append(`<td rowspan="1" colspan="1"><div class="cell"></div></td>`);
+                            userEle.append(`<td rowspan="1" colspan="1"><div class="cell">学号异常</div></td>`);
                         userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${user['score']}</div></td>`);
                         userEle.append(`<td rowspan="1" colspan="1"><div class="cell">${Object.keys(user['solved']).length}</div></td>`);
 
