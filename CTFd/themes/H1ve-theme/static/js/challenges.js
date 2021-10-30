@@ -595,10 +595,15 @@ function getsolves(id) {
     box.empty();
     for (var i = 0; i < data.length; i++) {
       var id = data[i].account_id;
-      if (Object.keys(classsignMap).includes(data[i].idc.substr(0,9))) {
-        var class_ = classsignMap[data[i].idc.substr(0,9)];
+      var class_;
+      if (data[i].idc.length === 11) {
+        if (Object.keys(classsignMap).includes(data[i].idc.substr(0, 9))) {
+          class_ = classsignMap[data[i].idc.substr(0, 9)];
+        } else {
+          class_ = "非参赛年级";
+        }
       } else {
-        var class_ = "非参赛年级";
+        class_ = "学号异常";
       }
       var name = data[i].name;
       var date = moment(data[i].date)
