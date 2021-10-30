@@ -529,7 +529,10 @@ class ChallengeSolves(Resource):
             response.append(
                 {
                     "account_id": solve.account_id,
-                    "name": solve.account.name,
+                    "user": solve.account.name,
+                    "name": solve.account.affiliation,
+                    "idc": solve.account.website,
+                    "qq": solve.account.country,
                     "date": isoformat(solve.date),
                     "account_url": generate_account_url(account_id=solve.account_id),
                 }
