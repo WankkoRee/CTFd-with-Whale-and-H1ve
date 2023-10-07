@@ -106,7 +106,8 @@ def load(app):
         dynamic_docker_challenge = DynamicDockerChallenge.query \
             .filter(DynamicDockerChallenge.id == challenge_id) \
             .first_or_404()
-        flag = "flag{" + str(uuid.uuid4()) + "}"
+        flag_format = str(configs.get("flag_format"))
+        flag = flag_format % str(uuid.uuid4())
         if dynamic_docker_challenge.redirect_type == "http":
             ControlUtil.add_container(app=app, user_id=user_id, challenge_id=challenge_id, flag=flag)
         else:

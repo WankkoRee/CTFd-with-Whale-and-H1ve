@@ -65,6 +65,7 @@
 
       | 参数                                               | 推荐值                          | 参考来源                                                                                                                                             |
       |--------------------------------------------------|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+      | Flag Format                                      | `flag{%s}`                   | flag 格式, 参考其他比赛的规则                                                                                                                               |
       | Docker API URL                                   | `unix://var/run/docker.sock` | [docker-compose.yml](docker-compose.yml)`.services[ctfd]`能够访问到的 Docker API                                                                       |
       | Frp API IP                                       | `172.1.0.3`                  | [docker-compose.yml](docker-compose.yml)`.services[frp-client].networks[frp].ipv4_address`, [frpc.ini](config/frp/frpc.ini)`[common].admin_addr` |
       | Frp API Port                                     | `7400`                       | [docker-compose.yml](docker-compose.yml)`.services[frp-client].expose[0]`, [frpc.ini](config/frp/frpc.ini)`[common].admin_port`                  |
