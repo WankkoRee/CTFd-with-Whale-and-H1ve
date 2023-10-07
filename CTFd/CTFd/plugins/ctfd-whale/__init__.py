@@ -89,10 +89,10 @@ def load(app):
         redis_util = RedisUtils(app=app, user_id=user_id)
 
         if not redis_util.acquire_lock():
-            return json.dumps({'success': False, 'msg': 'Request Too Fast!'})
+            return json.dumps({'success': False, 'msg': '请求过快'})
 
         if ControlUtil.frequency_limit():
-            return json.dumps({'success': False, 'msg': 'Frequency limit, You should wait at least 1 min.'})
+            return json.dumps({'success': False, 'msg': '请不要快速开关题目，你需要至少等待1分钟'})
 
         ControlUtil.remove_container(app, user_id)
         challenge_id = request.args.get('challenge_id')
@@ -157,10 +157,10 @@ def load(app):
         user_id = current_user.get_current_user().id
         redis_util = RedisUtils(app=app, user_id=user_id)
         if not redis_util.acquire_lock():
-            return json.dumps({'success': False, 'msg': 'Request Too Fast!'})
+            return json.dumps({'success': False, 'msg': '请求过快'})
 
         if ControlUtil.frequency_limit():
-            return json.dumps({'success': False, 'msg': 'Frequency limit, You should wait at least 1 min.'})
+            return json.dumps({'success': False, 'msg': '请不要快速开关题目，你需要至少等待1分钟'})
 
         if ControlUtil.remove_container(app, user_id):
             redis_util.release_lock()
@@ -175,10 +175,10 @@ def load(app):
         user_id = current_user.get_current_user().id
         redis_util = RedisUtils(app=app, user_id=user_id)
         if not redis_util.acquire_lock():
-            return json.dumps({'success': False, 'msg': 'Request Too Fast!'})
+            return json.dumps({'success': False, 'msg': '请求过快'})
 
         if ControlUtil.frequency_limit():
-            return json.dumps({'success': False, 'msg': 'Frequency limit, You should wait at least 1 min.'})
+            return json.dumps({'success': False, 'msg': '请不要快速开关题目，你需要至少等待1分钟'})
 
         configs = DBUtils.get_all_configs()
         challenge_id = request.args.get('challenge_id')
