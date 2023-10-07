@@ -3,7 +3,9 @@ name: ctfd
 
 services:
   ctfd:
-    build: .
+    build:
+      context: ./CTFd/
+      dockerfile: Dockerfile
     user: root
     expose:
       - "8000"
