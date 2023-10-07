@@ -1,81 +1,93 @@
-version: '2.1'
+version: '3.8'
+name: ctfd
 
 services:
   ctfd:
     build: .
     user: root
-    restart: always
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     environment:
       - UPLOAD_FOLDER=/var/uploads
-      - DATABASE_URL=mysql+pymysql://root:ctfd@db/ctfd
-      - REDIS_URL=redis://cache:6379
-      - WORKERS=1
       - LOG_FOLDER=/var/log/CTFd
+      - DATABASE_URL=mysql+pymysql://ctfd:123456@mariadb/ctfd
+      - REDIS_URL=redis://redis:6379
+      - WORKERS=1
       - ACCESS_LOG=-
       - ERROR_LOG=-
     volumes:
-      - .data/CTFd/logs:/var/log/CTFd
-      - .data/CTFd/uploads:/var/uploads
-      - .:/opt/CTFd:ro
+      - ./data/CTFd/logs/:/var/log/CTFd/
+      - ./data/CTFd/uploads/:/var/uploads/
       - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     depends_on:
-      - db
+      - mariadb
+      - redis
+      - frp-client
+    restart: unless-stopped
     networks:
         default:
         internal:
         frp:
             ipv4_address: 172.1.0.2
 
-  db:
+  mariadb:
     image: mariadb:10.4
-    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=ctfd
       - MYSQL_USER=ctfd
-      - MYSQL_PASSWORD=ctfd
+      - MYSQL_PASSWORD=123456
       - MYSQL_DATABASE=ctfd
     volumes:
-      - .data/mysql:/var/lib/mysql
+      - ./data/mysql/:/var/lib/mysql/
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
     networks:
         internal:
     # This command is required to set important mariadb defaults
     command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --wait_timeout=28800, --log-warnings=0]
 
-  cache:
+  redis:
     image: redis:4
-    restart: always
     volumes:
-    - .data/redis:/data
+      - ./data/redis/:/data/
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
     networks:
         internal:
 
-  frpc:
+  frp-client:
     image: glzjin/frp:latest
-    restart: always
     volumes:
-      - ./frp:/conf/
+      - ./config/frp/:/conf/
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     depends_on:
-      - frps
+      - frp-server
     entrypoint:
         - /usr/local/bin/frpc
         - -c
         - /conf/frpc.ini
+    restart: unless-stopped
     networks:
         frp:
             ipv4_address: 172.1.0.3
         frp_containers:
 
-  frps:
+  frp-server:
     image: glzjin/frp:latest
-    restart: always
     volumes:
-      - ./frp:/conf/
+      - ./config/frp/:/conf/
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     entrypoint:
         - /usr/local/bin/frps
         - -c
         - /conf/frps.ini
+    restart: unless-stopped
     network_mode: host
 
 networks:
