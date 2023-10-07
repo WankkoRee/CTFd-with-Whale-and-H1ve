@@ -27,10 +27,10 @@ services:
       - frp-client
     restart: unless-stopped
     networks:
-        default:
-        internal:
-        frp:
-            ipv4_address: 172.1.0.2
+      ctfd:
+        ipv4_address: 192.168.0.2
+      frp:
+        ipv4_address: 172.1.0.2
 
   mariadb:
     image: mariadb:10.4
@@ -43,11 +43,12 @@ services:
       - ./data/mysql/:/var/lib/mysql/
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-    restart: unless-stopped
-    networks:
-        internal:
     # This command is required to set important mariadb defaults
     command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --wait_timeout=28800, --log-warnings=0]
+    restart: unless-stopped
+    networks:
+      ctfd:
+        ipv4_address: 192.168.0.3
 
   redis:
     image: redis:4
@@ -57,10 +58,13 @@ services:
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     networks:
-        internal:
+      ctfd:
+        ipv4_address: 192.168.0.4
 
   frp-client:
     image: glzjin/frp:latest
+    expose:
+      - 7400
     volumes:
       - ./config/frp/:/conf/
       - /etc/timezone:/etc/timezone:ro
@@ -68,40 +72,57 @@ services:
     depends_on:
       - frp-server
     entrypoint:
-        - /usr/local/bin/frpc
-        - -c
-        - /conf/frpc.ini
+      - /usr/local/bin/frpc
+      - -c
+      - /conf/frpc.ini
     restart: unless-stopped
     networks:
-        frp:
-            ipv4_address: 172.1.0.3
-        frp_containers:
+      frp:
+        ipv4_address: 172.1.0.3
+      frp_containers:
 
   frp-server:
     image: glzjin/frp:latest
+    expose:
+      - 1638
+      - 6490
+    ports:
+      - "30000-31000:30000-31000"
     volumes:
       - ./config/frp/:/conf/
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     entrypoint:
-        - /usr/local/bin/frps
-        - -c
-        - /conf/frps.ini
+      - /usr/local/bin/frps
+      - -c
+      - /conf/frps.ini
     restart: unless-stopped
-    network_mode: host
+    networks:
+      frp:
+        ipv4_address: 172.1.0.4
+      frp_containers:
 
 networks:
-    default:
-    internal:
-        internal: true
-    frp:
-        driver: bridge
-        ipam:
-            config:
-                - subnet: 172.1.0.0/16
-    frp_containers:
-        driver: overlay
-        internal: true
-        ipam:
-            config:
-                - subnet: 172.2.0.0/16
+  ctfd:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.0.0/24
+          gateway: 192.168.0.1
+  frp:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.1.0.0/16
+          gateway: 172.1.0.1
+  frp_containers:
+    driver: overlay
+    attachable: true
+    internal: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.2.0.0/16
+          gateway: 172.2.0.1
