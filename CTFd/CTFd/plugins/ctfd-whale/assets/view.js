@@ -140,7 +140,7 @@ CTFd._internal.challenge.renew = function() {
     var challenge_id = parseInt($('#challenge-id').val());
     var url = "/plugins/ctfd-whale/container?challenge_id=" + challenge_id;
 
-    $('#whale-button-renew')[0].innerHTML = "重置中...";
+    $('#whale-button-renew')[0].innerHTML = "续期中...";
     $('#whale-button-renew')[0].disabled = true;
 
     var params = {};
@@ -168,11 +168,11 @@ CTFd._internal.challenge.renew = function() {
             loadInfo();
             CTFd.ui.ezq.ezAlert({
                 title: "成功",
-                body: "题目环境已重置！",
+                body: "题目环境已续期！",
                 button: "确认"
             });
         } else {
-            $('#whale-button-renew')[0].innerHTML = "重置题目环境";
+            $('#whale-button-renew')[0].innerHTML = "续期题目环境";
             $('#whale-button-renew')[0].disabled = false;
             CTFd.ui.ezq.ezAlert({
                 title: "失败",

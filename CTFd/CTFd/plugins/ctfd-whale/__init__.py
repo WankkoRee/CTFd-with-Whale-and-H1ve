@@ -188,7 +188,7 @@ def load(app):
         if container is None:
             return json.dumps({'success': False, 'msg': 'Instance not found.'})
         if container.renew_count >= docker_max_renew_count:
-            return json.dumps({'success': False, 'msg': 'Max renewal times exceed.'})
+            return json.dumps({'success': False, 'msg': '达到最大续期次数'})
         ControlUtil.renew_container(user_id=user_id, challenge_id=challenge_id)
         redis_util.release_lock()
         return json.dumps({'success': True})
